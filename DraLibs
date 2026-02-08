@@ -1,4 +1,4 @@
--- [[ INDRA UI LIBRARY - MOBILE VERSION ]] --
+-- [[ INDRA NATIVE UI LIBRARY - FIX COLOR ERROR ]] --
 local IndraLib = {}
 
 function IndraLib:CreateWindow(HubName)
@@ -12,19 +12,20 @@ function IndraLib:CreateWindow(HubName)
     ScreenGui.Parent = pgui
     ScreenGui.ResetOnSpawn = false
 
-    -- Tombol IN (Minimize)
     local OpenBtn = Instance.new("TextButton")
     local UICornerBtn = Instance.new("UICorner")
     OpenBtn.Size = UDim2.new(0, 50, 0, 50)
     OpenBtn.Position = UDim2.new(0, 10, 0.4, 0)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     OpenBtn.Text = "IN"
-    OpenBtn.TextColor3 = Color3.white
+    OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white ke .fromRGB
+    OpenBtn.TextSize = 18
     OpenBtn.Parent = ScreenGui
+    OpenBtn.ZIndex = 10
+    
     UICornerBtn.CornerRadius = UDim.new(1, 0)
     UICornerBtn.Parent = OpenBtn
 
-    -- Frame Utama
     local MainFrame = Instance.new("Frame")
     MainFrame.Size = UDim2.new(0, 220, 0, 250)
     MainFrame.Position = UDim2.new(0.5, -110, 0.5, -125)
@@ -33,20 +34,19 @@ function IndraLib:CreateWindow(HubName)
     MainFrame.BorderSizePixel = 0
     MainFrame.Parent = ScreenGui
 
-    -- Judul
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 35)
     Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     Title.Text = HubName
-    Title.TextColor3 = Color3.white
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
+    Title.TextSize = 16
     Title.Parent = MainFrame
 
-    -- Container buat Tombol-tombol (Scrolling)
     local Container = Instance.new("ScrollingFrame")
     Container.Size = UDim2.new(1, 0, 1, -35)
     Container.Position = UDim2.new(0, 0, 0, 35)
     Container.BackgroundTransparency = 1
-    Container.CanvasSize = UDim2.new(0, 0, 2, 0) -- Bisa scroll kebawah
+    Container.CanvasSize = UDim2.new(0, 0, 2, 0)
     Container.ScrollBarThickness = 2
     Container.Parent = MainFrame
 
@@ -55,35 +55,28 @@ function IndraLib:CreateWindow(HubName)
     UIList.Padding = UDim.new(0, 5)
     UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
-    -- Logika Buka Tutup
     OpenBtn.MouseButton1Click:Connect(function()
         MainFrame.Visible = not MainFrame.Visible
         OpenBtn.Text = MainFrame.Visible and "X" or "IN"
     end)
 
-    -- Fungsi buat bikin Tombol (Button)
     function IndraLib:CreateButton(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 40)
         Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
         Btn.Text = Text
-        Btn.TextColor3 = Color3.white
+        Btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
         Btn.Parent = Container
-        
-        Btn.MouseButton1Click:Connect(function()
-            Callback()
-        end)
+        Btn.MouseButton1Click:Connect(Callback)
     end
 
-    -- Fungsi buat bikin Toggle (ON/OFF)
     function IndraLib:CreateToggle(Text, Callback)
         local Tgl = Instance.new("TextButton")
         Tgl.Size = UDim2.new(0, 200, 0, 40)
-        Tgl.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Start Merah
+        Tgl.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
         Tgl.Text = Text .. " : OFF"
-        Tgl.TextColor3 = Color3.white
+        Tgl.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
         Tgl.Parent = Container
-
         local State = false
         Tgl.MouseButton1Click:Connect(function()
             State = not State
