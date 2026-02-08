@@ -1,3 +1,4 @@
+-- [[ INDRA NATIVE UI LIBRARY - OFFICIAL CLOUD VERSION ]] --
 local IndraLib = {}
 
 function IndraLib:CreateWindow(HubName)
@@ -17,11 +18,10 @@ function IndraLib:CreateWindow(HubName)
     OpenBtn.Position = UDim2.new(0, 10, 0.4, 0)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     OpenBtn.Text = "IN"
-    OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255) -- FIX: Gak pake .white lagi
+    OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     OpenBtn.TextSize = 18
     OpenBtn.Parent = ScreenGui
     OpenBtn.ZIndex = 10
-    
     UICornerBtn.CornerRadius = UDim.new(1, 0)
     UICornerBtn.Parent = OpenBtn
 
@@ -38,7 +38,6 @@ function IndraLib:CreateWindow(HubName)
     Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     Title.Text = HubName
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.TextSize = 16
     Title.Parent = MainFrame
 
     local Container = Instance.new("ScrollingFrame")
