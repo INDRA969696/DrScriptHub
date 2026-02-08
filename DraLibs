@@ -1,11 +1,10 @@
--- [[ INDRA NATIVE UI LIBRARY - MOBILE VERSION ]] --
+-- [[ INDRA UI LIBRARY - MOBILE VERSION ]] --
 local IndraLib = {}
 
 function IndraLib:CreateWindow(HubName)
     local player = game.Players.LocalPlayer
     local pgui = player:WaitForChild("PlayerGui")
     
-    -- Hapus yang lama biar gak tumpuk
     if pgui:FindFirstChild("IndraHub") then pgui.IndraHub:Destroy() end
 
     local ScreenGui = Instance.new("ScreenGui")
