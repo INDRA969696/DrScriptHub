@@ -1,4 +1,3 @@
--- [[ INDRA NATIVE UI LIBRARY - FIX COLOR ERROR ]] --
 local IndraLib = {}
 
 function IndraLib:CreateWindow(HubName)
@@ -18,7 +17,7 @@ function IndraLib:CreateWindow(HubName)
     OpenBtn.Position = UDim2.new(0, 10, 0.4, 0)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     OpenBtn.Text = "IN"
-    OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white ke .fromRGB
+    OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255) -- FIX: Gak pake .white lagi
     OpenBtn.TextSize = 18
     OpenBtn.Parent = ScreenGui
     OpenBtn.ZIndex = 10
@@ -38,7 +37,7 @@ function IndraLib:CreateWindow(HubName)
     Title.Size = UDim2.new(1, 0, 0, 35)
     Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     Title.Text = HubName
-    Title.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 16
     Title.Parent = MainFrame
 
@@ -65,7 +64,7 @@ function IndraLib:CreateWindow(HubName)
         Btn.Size = UDim2.new(0, 200, 0, 40)
         Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
         Btn.Text = Text
-        Btn.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
+        Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
         Btn.MouseButton1Click:Connect(Callback)
     end
@@ -75,7 +74,7 @@ function IndraLib:CreateWindow(HubName)
         Tgl.Size = UDim2.new(0, 200, 0, 40)
         Tgl.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
         Tgl.Text = Text .. " : OFF"
-        Tgl.TextColor3 = Color3.fromRGB(255, 255, 255) -- Ganti dari .white
+        Tgl.TextColor3 = Color3.fromRGB(255, 255, 255)
         Tgl.Parent = Container
         local State = false
         Tgl.MouseButton1Click:Connect(function()
@@ -88,3 +87,5 @@ function IndraLib:CreateWindow(HubName)
 
     return IndraLib
 end
+
+return IndraLib
