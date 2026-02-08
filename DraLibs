@@ -16,8 +16,8 @@ function IndraLib:CreateWindow(HubName)
     local UICornerBtn = Instance.new("UICorner")
     
     OpenBtn.Name = "IndraLogoBtn"
-    OpenBtn.Size = UDim2.new(0, 60, 0, 60)
-    OpenBtn.Position = UDim2.new(0, 10, 0.4, 0)
+    OpenBtn.Size = UDim2.new(0, 40, 0, 40)
+    OpenBtn.Position = UDim2.new(0, 10, 0.8, 0)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     OpenBtn.Image = "rbxassetid://83893542839026" -- LOGO INDRA NO ROOT RESMI
     OpenBtn.Parent = ScreenGui
