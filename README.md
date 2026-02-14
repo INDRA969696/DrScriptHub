@@ -1,2 +1,2 @@
-# DrScriptHub
-.lua
+# How to Use DraLibs
+
