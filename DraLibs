@@ -17,16 +17,16 @@ function IndraLib:CreateWindow(HubName)
     
     OpenBtn.Name = "IndraLogoBtn"
     OpenBtn.Size = UDim2.new(0, 40, 0, 40)
-    OpenBtn.Position = UDim2.new(0, 10, 0.8, 0)
+    OpenBtn.Position = UDim2.new(0, 10, 0.6, 0)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    OpenBtn.Image = "rbxassetid://83893542839026" -- LOGO INDRA NO ROOT RESMI
+    OpenBtn.Image = "rbxassetid://83893542839026" -- Put Your Logo Here
     OpenBtn.Parent = ScreenGui
     OpenBtn.ZIndex = 10
     
     UICornerBtn.CornerRadius = UDim.new(1, 0)
     UICornerBtn.Parent = OpenBtn
 
-    -- FITUR GESER (DRAGGABLE) KHUSUS MOBILE
+    -- MOBILE DRAGGABLE
     local dragging, dragInput, dragStart, startPos
     OpenBtn.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -52,13 +52,13 @@ function IndraLib:CreateWindow(HubName)
     MainFrame.Size = UDim2.new(0, 220, 0, 250)
     MainFrame.Position = UDim2.new(0.5, -110, 0.5, -125)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    MainFrame.Visible = false
+    MainFrame.Visible = true
     MainFrame.BorderSizePixel = 0
     MainFrame.Parent = ScreenGui
 
     local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1, 0, 0, 35)
-    Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     Title.Text = HubName
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 16
@@ -107,7 +107,44 @@ function IndraLib:CreateWindow(HubName)
             Callback(State)
         end)
     end
+    function IndraLib:CreateDropdown(Text, List, Callback)
+    local DropdownBtn = Instance.new("TextButton")
+    DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
+    DropdownBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    DropdownBtn.Text = Text .. " >"
+    DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    DropdownBtn.Parent = Container -- Menu utama lo
 
+    -- SIDE PANEL
+    local SidePanel = Instance.new("Frame")
+    SidePanel.Size = UDim2.new(0, 150, 0, #List * 35)
+    -- Posisi X di set ke 205 (gap 5 pixel dari menu utama)
+    SidePanel.Position = UDim2.new(0, 205, 0, 0) 
+    SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    SidePanel.Visible = false
+    SidePanel.Parent = DropdownBtn
+
+    local Layout = Instance.new("UIListLayout")
+    Layout.Parent = SidePanel
+
+    for _, v in pairs(List) do
+        local Opt = Instance.new("TextButton")
+        Opt.Size = UDim2.new(1, 0, 0, 35)
+        Opt.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        Opt.Text = tostring(v)
+        Opt.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Opt.Parent = SidePanel
+
+        Opt.MouseButton1Click:Connect(function()
+            Callback(v)
+            SidePanel.Visible = false -- Langsung tutup (Zero Delay)
+        end)
+    end
+
+    DropdownBtn.MouseButton1Click:Connect(function()
+        SidePanel.Visible = not SidePanel.Visible
+    end)
+end
     return IndraLib
 end
 
