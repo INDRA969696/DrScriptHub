@@ -1,4 +1,4 @@
-local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibs?t="..tick()))()
+local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibrary/DraLibs?t="..tick()))()
 
 local MyHub = IndraLib:CreateWindow("Enter Brainrot | DraScript")
 
