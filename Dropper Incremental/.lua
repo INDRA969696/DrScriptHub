@@ -3,7 +3,7 @@ if game.PlaceId ~= 70960300100792 then return end
 -- [This script is made free if you find this script with a key please do not use it because there is a risk of malware in it[!]]--
 -- Made By : Indra No Root
 -- Brand Name : DraScript/DraSky
-local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibs?t="..tick()))()
+local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibrary/DraLibs?t="..tick()))()
 
 local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CollectPart")
 local sudahMuncul = false 
