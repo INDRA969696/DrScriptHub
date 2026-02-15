@@ -28,7 +28,15 @@ IndraLib:CreateDropdown(Text, List, Callback
 ```
 
 # DraLibs(the minimalist UI)
-<p align="center">
-  <img src="MenuUI.png" width="45%" />
-  <img src="DropdownUI.png" width="45%" />
-</p>
+<table align="center" Border="0">
+<tr>
+  <td align="center">
+    <img src="MainUI.png" width="200px" /><br/>
+    <sub><b>Main UI</b></sub>
+  </td>
+  <td align="center">
+    <img src="DropdownUI.png" width="200px" /><br/>
+    <sub><b>Dropdown UI</b></sub>
+  </td>
+</tr>
+</table>
