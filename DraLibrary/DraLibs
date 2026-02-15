@@ -104,7 +104,6 @@ function IndraLib:CreateWindow(HubName)
     MainFrame.BorderSizePixel = 0
     MainFrame.Visible = true
     MainFrame.Parent = ScreenGui
-    MainFrame.ClipsDescendants = false 
 
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
