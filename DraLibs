@@ -149,9 +149,13 @@ function IndraLib:CreateWindow(HubName)
         end)
     end
 
-    DropdownBtn.MouseButton1Click:Connect(function()
-        SidePanel.Visible = not SidePanel.Visible
-    end)
+        Opt.MouseButton1Click:Connect(function()
+            DropdownBtn.Text = tostring(v) .. " >"
+            
+            Callback(v)
+            
+            SidePanel.Visible = false 
+        end)
 end
     return IndraLib
 end
