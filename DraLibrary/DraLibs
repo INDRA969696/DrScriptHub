@@ -108,6 +108,31 @@ function IndraLib:CreateWindow(HubName)
             Callback(State)
         end)
     end
+    function IndraLib:CreateNotify(title, text, duration
+    local MainNotify = Instance.new("Frame")
+    MainNotify.Name = "Dralibs_Notify"
+    MainNotify.Size = UDim2.new(0, 250, 0, 80)
+    MainNotify.Position = UDim2.new(1.5, 0, 0.8, 0)
+    MainNotify.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    MainNotify.Parent = game.CoreGui:FindFirstChild("Dralibs_Main")
+    
+    -- Tambahin UI Corner biar estetik
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = Tool.new(0, 8)
+    corner.Parent = MainNotify
+
+    -- 2. Label
+    -- ('title' and 'text')
+
+    -- 3. ENTRY ANIMATION
+    MainNotif:TweenPosition(UDim2.new(0.8, 0, 0.8, 0), "Out", "Quint", 0.5, true)
+
+    -- 4. AUTO DESTROY
+    task.wait(duration or 3)
+    MainNotify:TweenPosition(UDim2.new(1.5, 0, 0.8, 0), "In", "Quint", 0.5, true)
+    task.wait(0.5)
+    MainNotify:Destroy()
+end
     function IndraLib:CreateDropdown(Text, List, Callback)
     local DropdownBtn = Instance.new("TextButton")
     DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
@@ -145,7 +170,7 @@ function IndraLib:CreateWindow(HubName)
 
         Opt.MouseButton1Click:Connect(function()
             Callback(v)
-            SidePanel.Visible = false -- Langsung tutup (Zero Delay)
+            SidePanel.Visible = false -- (Zero Delay)
         end)
     end
 
