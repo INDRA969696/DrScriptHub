@@ -32,11 +32,11 @@ IndraLib:CreateDropdown(Text, List, Callback
 <table align="center" border="0">
   <tr>
     <td align="center" width="250">
-      <img src="MainUI" width="200" /><br/>
+      <img src="MainUI.png" width="200" /><br/>
       <sub><b>MainUI</b></sub>
     </td>
     <td align="center" width="250">
-      <img src="DropdownUI" width="200" /><br/>
+      <img src="DropdownUI.png" width="200" /><br/>
       <sub><b>Options</b></sub>
     </td>
   </tr>
