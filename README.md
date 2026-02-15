@@ -28,15 +28,31 @@ IndraLib:CreateDropdown(Text, List, Callback
 ```
 
 # DraLibs(the minimalist UI)
-<table align="center" Border="0">
-<tr>
-  <td align="center">
-    <img src="MainUI.png" width="200px" height="200" style="object-fit: cover" /><br/>
-    <sub><b>MainUI</b></sub>
-  </td>
-  <td align="center">
-    <img src="DropdownUI.png" width="200px" height="200" style="object-fit: cover" /><br/>
-    <sub><b>Options</b></sub>
-  </td>
-</tr>
+<table align="center" border="0">
+  <tr>
+    <td align="center" width="250">
+      <img src="MainUI" width="200" /><br/>
+      <sub><b>MainUI</b></sub>
+    </td>
+    <td align="center" width="250">
+      <img src="DropdownUI" width="200" /><br/>
+      <sub><b>Options</b></sub>
+    </td>
+  </tr>
 </table>
+
+<br clear="all" />
+<br />
+
+## Why Dralibs? (The Flex)
+* **No Bloatware:** Made with efficient code, it won't eat up FPS.
+* **Low-End Friendly:** Remains smooth even when playing on an unstable cellphone.
+* **Simple API:** You don't need a PhD to understand how to use it.
+
+## Credits
+* **Indra**
+* **Pheedy**
+* **DraSky** (Brand Owner)
+## Changelog
+* **added Dropdown**
+* **added Notify**
