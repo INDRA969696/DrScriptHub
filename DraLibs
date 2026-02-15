@@ -71,6 +71,7 @@ function IndraLib:CreateWindow(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 2, 0)
     Container.ScrollBarThickness = 2
     Container.Parent = MainFrame
+    Container.ClipsDescendants = false
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
@@ -110,29 +111,36 @@ function IndraLib:CreateWindow(HubName)
     function IndraLib:CreateDropdown(Text, List, Callback)
     local DropdownBtn = Instance.new("TextButton")
     DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
-    DropdownBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    DropdownBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     DropdownBtn.Text = Text .. " >"
     DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    DropdownBtn.Parent = Container -- Menu utama lo
+    DropdownBtn.BorderSizePixel = 0
+    DropdownBtn.ZIndex = 2
+    DropdownBtn.Parent = Container
 
-    -- SIDE PANEL
     local SidePanel = Instance.new("Frame")
-    SidePanel.Size = UDim2.new(0, 150, 0, #List * 35)
-    -- Posisi X di set ke 205 (gap 5 pixel dari menu utama)
+    SidePanel.Size = UDim2.new(0, 140, 0, #List * 32)
+    -- Geser ke kanan (205) biar gak numpuk menu utama
     SidePanel.Position = UDim2.new(0, 205, 0, 0) 
     SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    SidePanel.BorderSizePixel = 1
     SidePanel.Visible = false
+    SidePanel.ZIndex = 10
     SidePanel.Parent = DropdownBtn
 
-    local Layout = Instance.new("UIListLayout")
-    Layout.Parent = SidePanel
+    local SideLayout = Instance.new("UIListLayout")
+    SideLayout.Parent = SidePanel
+    SideLayout.Padding = UDim.new(0, 2)
 
     for _, v in pairs(List) do
         local Opt = Instance.new("TextButton")
-        Opt.Size = UDim2.new(1, 0, 0, 35)
+        Opt.Size = UDim2.new(1, 0, 0, 30)
         Opt.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         Opt.Text = tostring(v)
-        Opt.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Opt.TextColor3 = Color3.fromRGB(230, 230, 230)
+        Opt.TextSize = 14
+        Opt.BorderSizePixel = 0
+        Opt.ZIndex = 11
         Opt.Parent = SidePanel
 
         Opt.MouseButton1Click:Connect(function()
