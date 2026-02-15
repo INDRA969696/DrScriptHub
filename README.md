@@ -27,7 +27,7 @@ IndraLib:CreateNotify(Title, Text, Duration)
 IndraLib:CreateDropdown(Text, List, Callback
 ```
 
-# DraLibs/DraLibrary (the minimalist UI)
+# DraLibs(the minimalist UI)
 <p align="center">
   <img src="MenuUI.png" width="45%" />
   <img src="DropdownUI.png" width="45%" />
