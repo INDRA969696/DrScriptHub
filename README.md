@@ -1,4 +1,4 @@
-# Ping 🟨(Fix Notify)
+# Ping 🟨 (Fix Notify & Dropdown)
 # How to Use DraLibs
 
 ## prepair
