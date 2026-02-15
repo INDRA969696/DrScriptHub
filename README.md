@@ -7,9 +7,28 @@ local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA
 ```
 ### Create Window
 ```
-MyHub:CreateWindow("example_name")
+MyHub:CreateWindow(Text)
 ```
 ## Function
-### Create Button
+### Button
 ```
-MyHub:Create button(Fun
+MyHub:Create button(Text, Callback)
+```
+### Toggle
+```
+IndraLib:CreateToggle(Text, Callback)
+```
+### Notify
+```
+IndraLib:CreateNotify(Title, Text, Duration)
+```
+### Dropdown
+```
+IndraLib:CreateDropdown(Text, List, Callback
+```
+
+# DraLibs/DraLibrary (the minimalist UI)
+<p align="center">
+  <img src="MenuUI.png" width="45%" />
+  <img src="DropdownUI.png" width="45%" />
+</p>
