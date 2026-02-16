@@ -4,6 +4,7 @@ if game.PlaceId ~= 70960300100792 then return end
 -- Made By : Indra No Root
 -- Brand Name : DraScript/DraSky
 local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/DraLibs?t="..tick()))()
+IndraLib:CreateNotify("DraLibs Loaded!", "Script by Indra No Root. Enjoy!", 10)
 
 local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CollectPart")
 local sudahMuncul = false 
