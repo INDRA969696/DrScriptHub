@@ -1,4 +1,4 @@
-# Ping 🟨 (Fix Notify & Dropdown)
+# Ping 🟩
 # How to Use DraLibs
 
 ## prepair
@@ -55,5 +55,5 @@ IndraLib:CreateDropdown(Text, List, Callback
 * **Pheedy**
 * **DraSky** (Brand Owner)
 ## Changelog
-* **added Dropdown**
-* **added Notify**
+* **Fix Dropdown**
+* ****
