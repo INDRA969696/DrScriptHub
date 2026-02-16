@@ -76,4 +76,106 @@ function IndraLib:CreateWindow(HubName)
         end
     end)
     game:GetService("UserInputService").InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 220, 0, 250)
+    MainFrame.Position = UDim2.new(0.5, -110, 0.5, -125)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Visible = true
+    MainFrame.Parent = ScreenGui
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    Title.Text = HubName
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.TextSize = 16
+    Title.Parent = MainFrame
+    local Container = Instance.new("ScrollingFrame")
+    Container.Size = UDim2.new(1, 0, 1, -35)
+    Container.Position = UDim2.new(0, 0, 0, 35)
+    Container.BackgroundTransparency = 1
+    Container.CanvasSize = UDim2.new(0, 0, 0, 0)
+    Container.ScrollBarThickness = 2
+    Container.Parent = MainFrame
+    local UIList = Instance.new("UIListLayout")
+    UIList.Parent = Container
+    UIList.Padding = UDim.new(0, 5)
+    UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    UIList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
+    end)
+    OpenBtn.MouseButton1Click:Connect(function()
+        MainFrame.Visible = not MainFrame.Visible
+    end)
+    local InnerLib = {}
+    function InnerLib:CreateButton(Text, Callback)
+        local Btn = Instance.new("TextButton")
+        Btn.Size = UDim2.new(0, 200, 0, 40)
+        Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        Btn.Text = Text
+        Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Btn.Parent = Container
+        Btn.MouseButton1Click:Connect(Callback)
+    end
+    function InnerLib:CreateToggle(Text, Callback)
+        local Tgl = Instance.new("TextButton")
+        Tgl.Size = UDim2.new(0, 200, 0, 40)
+        Tgl.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        Tgl.Text = Text .. " : OFF"
+        Tgl.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Tgl.Parent = Container
+        local State = false
+        Tgl.MouseButton1Click:Connect(function()
+            State = not State
+            Tgl.BackgroundColor3 = State and Color3.fromRGB(0, 150, 0) or Color3.fromRGB(150, 0, 0)
+            Tgl.Text = Text .. (State and " : ON" or " : OFF")
+            Callback(State)
+        end)
+    end
+    function InnerLib:CreateDropdown(Text, List, Callback)
+        local DropdownBtn = Instance.new("TextButton")
+        DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
+        DropdownBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+        DropdownBtn.Text = Text .. " >"
+        DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DropdownBtn.Parent = Container
+        local SidePanel = Instance.new("Frame")
+        SidePanel.Size = UDim2.new(0, 140, 0, #List * 32)
+        SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        SidePanel.Visible = false
+        SidePanel.ZIndex = 500
+        SidePanel.Parent = ScreenGui
+        local SideLayout = Instance.new("UIListLayout")
+        SideLayout.Parent = SidePanel
+        SideLayout.Padding = UDim.new(0, 2)
+        DropdownBtn.MouseButton1Click:Connect(function()
+            SidePanel.Position = UDim2.new(0, MainFrame.AbsolutePosition.X + MainFrame.AbsoluteSize.X + 10, 0, DropdownBtn.AbsolutePosition.Y)
+            SidePanel.Visible = not SidePanel.Visible
+        end)
+        for _, v in pairs(List) do
+            local Opt = Instance.new("TextButton")
+            Opt.Size = UDim2.new(1, 0, 0, 30)
+            Opt.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            Opt.Text = tostring(v)
+            Opt.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Opt.ZIndex = 501
+            Opt.Parent = SidePanel
+            Opt.MouseButton1Click:Connect(function()
+                DropdownBtn.Text = tostring(v) .. " >"
+                Callback(v)
+                SidePanel.Visible = false
+            end)
+        end
+        MainFrame:GetPropertyChangedSignal("Visible"):Connect(function()
+            if not MainFrame.Visible then SidePanel.Visible = false end
+        end)
+    end
+    return InnerLib
+end
+
+return IndraLib
+
