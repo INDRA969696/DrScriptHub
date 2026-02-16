@@ -173,14 +173,14 @@ function IndraLib:CreateWindow(HubName)
         DropdownBtn.Text = Text .. " >"
         DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
         DropdownBtn.Parent = Container
-        DropdownBtn.ZIndex = 5
+        DropdownBtn.ZIndex = 10
 
         local SidePanel = Instance.new("Frame")
         SidePanel.Size = UDim2.new(0, 140, 0, #List * 32)
         SidePanel.Position = UDim2.new(0, 205, 0, 0) 
         SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         SidePanel.Visible = false
-        SidePanel.ZIndex = 10
+        SidePanel.ZIndex = 5
         SidePanel.Parent = DropdownBtn
 
         local SideLayout = Instance.new("UIListLayout")
