@@ -87,6 +87,7 @@ function IndraLib:CreateWindow(HubName)
     MainFrame.BorderSizePixel = 0
     MainFrame.Visible = true
     MainFrame.Parent = ScreenGui
+    MainFrame.ClipsDescendants = false
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
     Title.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
@@ -101,6 +102,7 @@ function IndraLib:CreateWindow(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
     Container.Parent = MainFrame
+    Container.ClipsDescendants = false
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
     UIList.Padding = UDim.new(0, 5)
@@ -142,27 +144,30 @@ function IndraLib:CreateWindow(HubName)
         DropdownBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         DropdownBtn.Text = Text .. " >"
         DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DropdownBtn.ZIndex = 10
         DropdownBtn.Parent = Container
         local SidePanel = Instance.new("Frame")
         SidePanel.Size = UDim2.new(0, 140, 0, #List * 32)
+        SidePanel.Position = UDim2.new(1, 10, 0, 0)
         SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         SidePanel.Visible = false
-        SidePanel.ZIndex = 500
-        SidePanel.Parent = ScreenGui
+        SidePanel.ZIndex = 50
+        SidePanel.Parent = MainFrame
         local SideLayout = Instance.new("UIListLayout")
         SideLayout.Parent = SidePanel
         SideLayout.Padding = UDim.new(0, 2)
         DropdownBtn.MouseButton1Click:Connect(function()
-            SidePanel.Position = UDim2.new(0, MainFrame.AbsolutePosition.X + MainFrame.AbsoluteSize.X + 10, 0, DropdownBtn.AbsolutePosition.Y)
+            local yPos = DropdownBtn.AbsolutePosition.Y - MainFrame.AbsolutePosition.Y
+            SidePanel.Position = UDim2.new(1, 10, 0, yPos)
             SidePanel.Visible = not SidePanel.Visible
         end)
         for _, v in pairs(List) do
             local Opt = Instance.new("TextButton")
             Opt.Size = UDim2.new(1, 0, 0, 30)
-            Opt.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            Opt.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             Opt.Text = tostring(v)
             Opt.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Opt.ZIndex = 501
+            Opt.ZIndex = 60
             Opt.Parent = SidePanel
             Opt.MouseButton1Click:Connect(function()
                 DropdownBtn.Text = tostring(v) .. " >"
@@ -170,12 +175,8 @@ function IndraLib:CreateWindow(HubName)
                 SidePanel.Visible = false
             end)
         end
-        MainFrame:GetPropertyChangedSignal("Visible"):Connect(function()
-            if not MainFrame.Visible then SidePanel.Visible = false end
-        end)
     end
     return InnerLib
 end
 
 return IndraLib
-
