@@ -69,7 +69,7 @@ function IndraLib:CreateWindow(HubName)
     OpenBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     OpenBtn.Image = "rbxassetid://83893542839026"
     OpenBtn.Parent = ScreenGui
-    OpenBtn.ZIndex = 10
+    OpenBtn.ZIndex = 500
 
     local UICornerBtn = Instance.new("UICorner")
     UICornerBtn.CornerRadius = UDim.new(1, 0)
@@ -104,6 +104,7 @@ function IndraLib:CreateWindow(HubName)
     MainFrame.BorderSizePixel = 0
     MainFrame.Visible = true
     MainFrame.Parent = ScreenGui
+    MainFrame.ClipsDescendants = false
 
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
@@ -120,6 +121,7 @@ function IndraLib:CreateWindow(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
     Container.Parent = MainFrame
+    Container.ClipsDescendants = false
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
