@@ -121,6 +121,7 @@ function IndraLib:CreateWindow(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
     Container.Parent = MainFrame
+    Container.Parent = SidePanel
     Container.ClipsDescendants = false
 
     local UIList = Instance.new("UIListLayout")
