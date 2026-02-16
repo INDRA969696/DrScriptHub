@@ -185,10 +185,6 @@ function IndraLib:CreateWindow(HubName)
 
         local SideLayout = Instance.new("UIListLayout")
         SideLayout.Parent = SidePanel
-        SideLayout.padding =  UDim.new(0, 2)
-        SideLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        SidePanel.CanvasSize = UDim2.new(0, 0, 0, SideLayout.AbsoluteContentSize.Y + 5)
-    end)
 
         DropdownBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
