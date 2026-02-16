@@ -173,14 +173,14 @@ function IndraLib:CreateWindow(HubName)
         DropdownBtn.Text = Text .. " >"
         DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
         DropdownBtn.Parent = Container
-        DropdownBtn.ZIndex = 10
+        DropdownBtn.ZIndex = 5
 
         local SidePanel = Instance.new("Frame")
         SidePanel.Size = UDim2.new(0, 140, 0, #List * 32)
         SidePanel.Position = UDim2.new(0, 205, 0, 0) 
         SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         SidePanel.Visible = false
-        SidePanel.ZIndex = 5
+        SidePanel.ZIndex = 10
         SidePanel.Parent = DropdownBtn
 
         local SideLayout = Instance.new("UIListLayout")
@@ -197,6 +197,7 @@ function IndraLib:CreateWindow(HubName)
             Opt.Text = tostring(v)
             Opt.TextColor3 = Color3.fromRGB(230, 230, 230)
             Opt.Parent = SidePanel
+            Opt.ZIndex = 15
 
             Opt.MouseButton1Click:Connect(function()
                 DropdownBtn.Text = tostring(v) .. " >"
