@@ -3,11 +3,11 @@ if game.PlaceId ~= 70960300100792 then return end
 -- [This script is made free if you find this script with a key please do not use it because there is a risk of malware in it[!]]--
 -- Made By : Indra No Root
 -- Brand Name : DraScript/DraSky
-local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/DraLibs?t="..tick()))()
+local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/DraLibs"))()
 IndraLib:CreateNotify("DraLibs Loaded!", "Script by Indra No Root. Enjoy!", 10)
 
 local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CollectPart")
-local sudahMuncul = false 
+local CoinTG = false 
 
 local MyHub = IndraLib:CreateWindow("Droper Incremental")
 
@@ -36,8 +36,8 @@ task.spawn(function()
             return workspace.Features.CoinUpgrades.Coins 
         end)
         
-        if success and coinPart.Transparency == 0.5 and not sudahMuncul then
-            sudahMuncul = true
+        if success and coinPart.Transparency == 0.5 and not CoinTG then
+            CoinTG = true
             
             MyHub:CreateToggle("Auto Collect Coins", function(State)
                 _G.AutoCollect = State
