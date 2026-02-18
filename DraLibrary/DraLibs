@@ -1,13 +1,5 @@
 local IndraLib = {}
 
--- [ System Pengganti Tick ]
-local currentGui = game:GetService("CoreGui"):FindFirstChild("IndraHub") or 
-                   game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("IndraHub")
-
-if currentGui then 
-    currentGui:Destroy() 
-end
-
 -- [ FUNGSI NOTIFY ] --
 -- Ditaruh di luar CreateWindow biar bisa dipanggil kapan aja
 function IndraLib:CreateNotify(title, text, duration)
