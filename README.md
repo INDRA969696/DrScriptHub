@@ -13,11 +13,11 @@ MyHub:CreateWindow(Text)
 ## Function
 ### Button
 ```
-MyHub:Create button(Text, Callback)
+MyHub:Create button(Text, function())
 ```
 ### Toggle
 ```
-IndraLib:CreateToggle(Text, Callback)
+IndraLib:CreateToggle(Text, function(state))
 ```
 ### Notify
 ```
@@ -25,7 +25,7 @@ IndraLib:CreateNotify(Title, Text, Duration)
 ```
 ### Dropdown
 ```
-IndraLib:CreateDropdown(Text, List, Callback
+IndraLib:CreateDropdown(Text, List, function(slected)
 ```
 
 # DraLibs(the minimalist UI)
