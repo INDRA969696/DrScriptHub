@@ -176,6 +176,44 @@ function IndraLib:CreateWindow(HubName)
         end)
     end
 
+    function InnerLib:CTX(Placeholder, Callback)
+        local TextContainer = Instance.new("Frame")
+        TextContainer.Size = UDim2.new(0, 200, 0, 45) -- Sedikit lebih tinggi biar lega
+        TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        TextContainer.BorderSizePixel = 0
+        TextContainer.Parent = Container
+
+        local UICorner = Instance.new("UICorner")
+        UICorner.CornerRadius = UDim.new(0, 6)
+        UICorner.Parent = TextContainer
+
+        local TBox = Instance.new("TextBox")
+        TBox.Size = UDim2.new(1, -20, 1, -10)
+        TBox.Position = UDim2.new(0, 10, 0, 5)
+        TBox.BackgroundTransparency = 1
+        TBox.Text = ""
+        TBox.PlaceholderText = Placeholder or "Input di sini..."
+        TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 120)
+        TBox.Font = Enum.Font.SourceSans
+        TBox.TextSize = 14
+        TBox.TextXAlignment = Enum.TextXAlignment.Left
+        TBox.ClearTextOnFocus = false
+        TBox.Parent = TextContainer
+
+        -- Efek pas di klik (Focus)
+        TBox.Focused:Connect(function()
+            TextContainer.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        end)
+
+        -- Efek pas selesai ngetik/lepas fokus
+        TBox.FocusLost:Connect(function(enterPressed)
+            TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            -- Jalankan callback setiap kali user selesai input
+            Callback(TBox.Text, enterPressed)
+        end)
+    end
+
     function InnerLib:CD(Text, List, Callback)
         local DropdownBtn = Instance.new("TextButton")
         DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
