@@ -246,7 +246,7 @@ function IndraLib:window(HubName)
         DropdownBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                SidePanel.Position = UDim2.new(0, DropdownBtn.AbsolutePosition.X + 205, 1, DropdownBtn.AbsolutePosition.Y)
+                SidePanel.Position = UDim2.new(0, DropdownBtn.AbsolutePosition.X + 205, 0, DropdownBtn.AbsolutePosition.Y)
                 SidePanel.Size = UDim2.new(0, 140, 0, #List * 30)
             end
         end)
