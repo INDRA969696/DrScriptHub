@@ -14,58 +14,83 @@ function IndraLib:window(HubName)
     -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 220, 0, 35) -- Mulai dari ukuran Title
-    MainFrame.Position = UDim2.new(0.5, -110, 0.2, 0)
+    MainFrame.Size = UDim2.new(0, 220, 0, 35) -- Mulai dari tinggi Title
+    MainFrame.Position = UDim2.new(0.5, -110, 0.3, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     MainFrame.BorderSizePixel = 0
+    MainFrame.ClipsDescendants = true -- Ini yang bikin rapi pas nutup
     MainFrame.Active = true
-    MainFrame.Draggable = true -- Dragging ON
-    MainFrame.ClipsDescendants = true -- Biar isi container gak tembus pas ketutup
     MainFrame.Parent = ScreenGui
 
+    -- [ STROKE MODERN ] --
     local FrameStroke = Instance.new("UIStroke")
-    FrameStroke.Thickness = 1.5
+    FrameStroke.Thickness = 1.8
     FrameStroke.Color = Color3.fromRGB(255, 255, 255)
     FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     FrameStroke.Parent = MainFrame
 
     local MainCorner = Instance.new("UICorner")
-    MainCorner.CornerRadius = UDim.new(0, 8)
+    MainCorner.CornerRadius = UDim.new(0, 9)
     MainCorner.Parent = MainFrame
 
-    -- [ TITLE BUTTON ] --
+    -- [ TITLE BUTTON - BIAR BISA DI-DRAG JUGA ] --
     local TitleBtn = Instance.new("TextButton")
     TitleBtn.Name = "TitleBtn"
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
-    TitleBtn.Position = UDim2.new(0, 0, 0, 0)
     TitleBtn.BackgroundTransparency = 1
-    TitleBtn.Text = "   " .. HubName .. "  ▼"
+    TitleBtn.Text = "      " .. HubName .. "  ▼"
     TitleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TitleBtn.TextSize = 15
+    TitleBtn.TextSize = 16
     TitleBtn.Font = Enum.Font.SourceSansBold
-    TitleBtn.TextXAlignment = Enum.HorizontalAlignment.Left
-    TitleBtn.ZIndex = 10 -- Pastiin paling depan
+    TitleBtn.TextXAlignment = Enum.TextXAlignment.Left
+    TitleBtn.ZIndex = 10 -- Harus di atas biar bisa diklik
     TitleBtn.Parent = MainFrame
 
-    -- [ CONTAINER ] --
+    -- [ CONTAINER ISINYA ] --
     local Container = Instance.new("ScrollingFrame")
     Container.Name = "Container"
     Container.Size = UDim2.new(1, 0, 0, 210) 
     Container.Position = UDim2.new(0, 0, 0, 35)
     Container.BackgroundTransparency = 1
+    Container.BorderSizePixel = 0
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
-    Container.Visible = false
-    Container.ZIndex = 5
+    Container.Visible = false -- Awalnya sembunyi
     Container.Parent = MainFrame
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
-    UIList.Padding = UDim.new(0, 7)
+    UIList.Padding = UDim.new(0, 6)
     UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
     UIList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
+    end)
+
+    -- [ SCRIPT DRAG MANUAL (BIAR GAK BUG DI MOBILE) ] --
+    local UIS = game:GetService("UserInputService")
+    local dragging, dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+
+    TitleBtn.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = MainFrame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then dragging = false end
+            end)
+        end
+    end)
+
+    UIS.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            update(input)
+        end
     end)
 
     -- [ LOGIC OPEN/CLOSE ] --
@@ -73,14 +98,13 @@ function IndraLib:window(HubName)
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         if toggled then
-            TitleBtn.Text = "   " .. HubName .. "  ▲"
-            MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
-            task.wait(0.1) -- Nunggu frame melebar dikit
+            TitleBtn.Text = "      " .. HubName .. "  ▲"
             Container.Visible = true
+            MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
         else
-            TitleBtn.Text = "   " .. HubName .. "  ▼"
-            Container.Visible = false
+            TitleBtn.Text = "      " .. HubName .. "  ▼"
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 35), "Out", "Quint", 0.4, true)
+            task.delay(0.3, function() if not toggled then Container.Visible = false end end)
         end
     end)
 
@@ -89,23 +113,17 @@ function IndraLib:window(HubName)
     function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 35)
-        Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        Btn.BackgroundTransparency = 0.5 -- Biar ada nuansa modern
+        Btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Btn.ZIndex = 6
         Btn.Parent = Container
-        
-        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
-        local bStroke = Instance.new("UIStroke")
-        bStroke.Color = Color3.fromRGB(255, 255, 255)
-        bStroke.Thickness = 0.8
-        bStroke.Parent = Btn
-        
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 5)
+        local bS = Instance.new("UIStroke")
+        bS.Color = Color3.fromRGB(60, 60, 60)
+        bS.Parent = Btn
         Btn.MouseButton1Click:Connect(Callback)
     end
 
-    -- Tambahin toggle/textbox di bawah sini kalo udah bener
     return InnerLib
 end
 
