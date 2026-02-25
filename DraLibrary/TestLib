@@ -119,8 +119,8 @@ function IndraLib:CreateWindow(HubName)
     Title.Parent = MainFrame
 
     local Credit = Instance.new("TextLabel")
-    Credit.Size = UDim2.new(1, -10, 0, 15) -- Dikasih -10 biar ada jarak dikit dari pinggir
-    Credit.Position = UDim2.new(0, 0, 1, -20) -- Posisi di bawah
+    Credit.Size = UDim2.new(1, -10, 0, 15)
+    Credit.Position = UDim2.new(0, 0, 1, -20)
     Credit.BackgroundTransparency = 1
     Credit.Text = "MakeWithDraLibs"
     Credit.TextColor3 = Color3.fromRGB(255, 255, 255)
