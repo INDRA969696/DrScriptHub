@@ -112,6 +112,11 @@ function IndraLib:window(HubName)
         Instance.new("UIStroke", Btn).Color = Color3.fromRGB(60, 60, 60)
         Btn.MouseButton1Click:Connect(Callback)
     end
+    local FrameStroke = Instance.new("UIStroke")
+    FrameStroke.Thickness = 1
+    FrameStroke.Color = Color3.fromRGB(255, 255, 255)
+    FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    FrameStroke.Parent = MainFrame
 
     -- 2. Tombol Kecil
     function InnerLib:sbutton(Text, Callback)
