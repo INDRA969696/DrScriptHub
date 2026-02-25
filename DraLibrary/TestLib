@@ -92,13 +92,13 @@ function IndraLib:window(HubName)
     MainFrame.Size = UDim2.new(0, 220, 0, 250)
     MainFrame.Position = UDim2.new(0.5, -110, 0.5, -125)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    MainFrame.BackgroundTransparency = 0.5 -- Coba kasih 0.5 biar efek glassmorphism, kalo mau ilang total set ke 1
+    MainFrame.BackgroundTransparency = 0
     MainFrame.BorderSizePixel = 0
     MainFrame.Parent = ScreenGui
     MainFrame.ClipsDescendants = true
 
     local FrameStroke = Instance.new("UIStroke")
-    FrameStroke.Thickness = 2 -- Ketebalan garis
+    FrameStroke.Thickness = 1.3
     FrameStroke.Color = Color3.fromRGB(255, 255, 255)
     FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     FrameStroke.Parent = MainFrame
@@ -108,15 +108,21 @@ function IndraLib:window(HubName)
     MainCorner.Parent = MainFrame
 
     local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1, 0, 0, 30)
-    Title.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    Title.Size = UDim2.new(1, 0, 0, 35)
+    Title.BackgroundTransparency = 1 -- Transparan total
     Title.Text = HubName
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 16
+    Title.Font = Enum.Font.SourceSansBold
     Title.Parent = MainFrame
 
-    Instance.new("UICorner", MainFrame, Title).CornerRadius = UDim.new(0, 10)
-
+    local Underline = Instance.new("Frame")
+    Underline.Size = UDim2.new(1, -20, 0, 1) 
+    Underline.Position = UDim2.new(0.5, 0, 1, 0)
+    Underline.AnchorPoint = Vector2.new(0.5, 0)
+    Underline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Underline.BorderSizePixel = 0
+    Underline.Parent = Title
 
     local Container = Instance.new("ScrollingFrame")
     Container.Size = UDim2.new(1, 0, 1, -50) 
