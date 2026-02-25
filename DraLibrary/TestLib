@@ -1,7 +1,5 @@
 local IndraLib = {}
 
--- [ FUNGSI NOTIFY ] --
--- Ditaruh di luar CreateWindow biar bisa dipanggil kapan aja
 function IndraLib:CreateNotify(title, text, duration)
     local sgui = game:GetService("CoreGui"):FindFirstChild("IndraHub") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("IndraHub")
     if not sgui then return end
@@ -9,11 +7,12 @@ function IndraLib:CreateNotify(title, text, duration)
     local MainNotify = Instance.new("Frame")
     MainNotify.Name = "Dralibs_Notify"
     MainNotify.Size = UDim2.new(0, 220, 0, 70)
-    MainNotify.Position = UDim2.new(1.2, 0, 0.8, 0) -- Mulai dari kanan luar layar
+    MainNotify.Position = UDim2.new(1.2, 0, 0.8, 0)
     MainNotify.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    MainNotify.BorderSizePixel = 1
-    MainNotify.BorderColor3 = Color3.fromRGB(60, 60, 60)
+    MainNotify.BorderSizePixel = 0
     MainNotify.Parent = sgui
+    
+    Instance.new("UICorner", MainNotify).CornerRadius = UDim.new(0, 8)
 
     local TitleLabel = Instance.new("TextLabel")
     TitleLabel.Size = UDim2.new(1, -10, 0, 25)
@@ -38,12 +37,10 @@ function IndraLib:CreateNotify(title, text, duration)
     ContentLabel.TextYAlignment = Enum.VerticalAlignment.Top
     ContentLabel.Parent = MainNotify
 
-    -- Animasi Masuk
     MainNotify:TweenPosition(UDim2.new(1, -230, 0.8, 0), "Out", "Quint", 0.5, true)
 
     task.spawn(function()
         task.wait(duration or 3)
-        -- Animasi Keluar
         MainNotify:TweenPosition(UDim2.new(1.2, 0, 0.8, 0), "In", "Quint", 0.5, true)
         task.wait(0.5)
         MainNotify:Destroy()
@@ -53,7 +50,6 @@ end
 function IndraLib:window(HubName)
     local player = game.Players.LocalPlayer
     local pgui = player:WaitForChild("PlayerGui")
-
     if pgui:FindFirstChild("IndraHub") then pgui.IndraHub:Destroy() end
 
     local ScreenGui = Instance.new("ScreenGui")
@@ -61,7 +57,6 @@ function IndraLib:window(HubName)
     ScreenGui.Parent = pgui
     ScreenGui.ResetOnSpawn = false
 
-    -- [ FITUR LOGO & DRAGGABLE ] --
     local OpenBtn = Instance.new("ImageButton")
     OpenBtn.Name = "IndraLogoBtn"
     OpenBtn.Size = UDim2.new(0, 40, 0, 40)
@@ -70,13 +65,9 @@ function IndraLib:window(HubName)
     OpenBtn.Image = "rbxassetid://83893542839026"
     OpenBtn.Parent = ScreenGui
     OpenBtn.ZIndex = 500
+    Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
 
-    local UICornerBtn = Instance.new("UICorner")
-    UICornerBtn.CornerRadius = UDim.new(1, 0)
-    UICornerBtn.Parent = OpenBtn
-
-    -- Mobile Dragging (Sesuai kode asli lu)
-    local dragging, dragInput, dragStart, startPos
+    local dragging, dragStart, startPos
     OpenBtn.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
@@ -96,19 +87,15 @@ function IndraLib:window(HubName)
         end
     end)
 
-    -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
     MainFrame.Size = UDim2.new(0, 220, 0, 250)
     MainFrame.Position = UDim2.new(0.5, -110, 0.5, -125)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
-    MainFrame.Visible = true
     MainFrame.Parent = ScreenGui
-    MainFrame.ClipsDescendants = false
+    MainFrame.ClipsDescendants = true
 
-    local MainCorner = Instance.new("UICorner")
-    MainCorner.CornerRadius = UDim.new(0, 10) -- Makin gede angkanya, makin melengkung
-    MainCorner.Parent = MainFrame
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
 
     local Title = Instance.new("TextLabel")
     Title.Size = UDim2.new(1, 0, 0, 30)
@@ -118,32 +105,30 @@ function IndraLib:window(HubName)
     Title.TextSize = 16
     Title.Parent = MainFrame
 
-    local Credit = Instance.new("TextLabel")
-    Credit.Size = UDim2.new(1, -10, 0, 15)
-    Credit.Position = UDim2.new(0, 0, 1, -20)
-    Credit.BackgroundTransparency = 1
-    Credit.Text = "MakeWithDraLibs"
-    Credit.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Credit.TextSize = 10
-    Credit.TextXAlignment = Enum.TextXAlignment.Right
-    Credit.TextYAlignment = Enum.TextYAlignment.Bottom
-    Credit.Parent = MainFrame
-
     local Container = Instance.new("ScrollingFrame")
-    Container.Size = UDim2.new(1, 0, 1, -35)
+    Container.Size = UDim2.new(1, 0, 1, -50) 
     Container.Position = UDim2.new(0, 0, 0, 35)
     Container.BackgroundTransparency = 1
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
+    Container.ClipsDescendants = true
     Container.Parent = MainFrame
-    Container.ClipsDescendants = false
+
+    local Credit = Instance.new("TextLabel")
+    Credit.Size = UDim2.new(1, -10, 0, 15)
+    Credit.Position = UDim2.new(0, 0, 1, -18)
+    Credit.BackgroundTransparency = 1
+    Credit.Text = "MakeWithDraLibs"
+    Credit.TextColor3 = Color3.fromRGB(100, 100, 100)
+    Credit.TextSize = 10
+    Credit.TextXAlignment = Enum.TextXAlignment.Right
+    Credit.Parent = MainFrame
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
     UIList.Padding = UDim.new(0, 5)
     UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
-    -- Auto Canvas Size (Biar ScrollingFrame berfungsi)
     UIList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
         Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
     end)
@@ -152,7 +137,6 @@ function IndraLib:window(HubName)
         MainFrame.Visible = not MainFrame.Visible
     end)
 
-    -- [ FITUR DALEM WINDOW ] --
     local InnerLib = {}
 
     function InnerLib:button(Text, Callback)
@@ -162,6 +146,7 @@ function IndraLib:window(HubName)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
         Btn.MouseButton1Click:Connect(Callback)
     end
 
@@ -172,6 +157,7 @@ function IndraLib:window(HubName)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
         Btn.MouseButton1Click:Connect(Callback)
     end
 
@@ -182,6 +168,7 @@ function IndraLib:window(HubName)
         Tgl.Text = Text .. " : OFF"
         Tgl.TextColor3 = Color3.fromRGB(255, 255, 255)
         Tgl.Parent = Container
+        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 6)
         local State = false
         Tgl.MouseButton1Click:Connect(function()
             State = not State
@@ -193,40 +180,21 @@ function IndraLib:window(HubName)
 
     function InnerLib:textbox(Placeholder, Callback)
         local TextContainer = Instance.new("Frame")
-        TextContainer.Size = UDim2.new(0, 200, 0, 45) -- Sedikit lebih tinggi biar lega
+        TextContainer.Size = UDim2.new(0, 200, 0, 40)
         TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         TextContainer.BorderSizePixel = 0
         TextContainer.Parent = Container
-
-        local UICorner = Instance.new("UICorner")
-        UICorner.CornerRadius = UDim.new(0, 6)
-        UICorner.Parent = TextContainer
+        Instance.new("UICorner", TextContainer).CornerRadius = UDim.new(0, 6)
 
         local TBox = Instance.new("TextBox")
-        TBox.Size = UDim2.new(1, -20, 1, -10)
-        TBox.Position = UDim2.new(0, 10, 0, 5)
+        TBox.Size = UDim2.new(1, -20, 1, 0)
+        TBox.Position = UDim2.new(0, 10, 0, 0)
         TBox.BackgroundTransparency = 1
         TBox.Text = ""
-        TBox.PlaceholderText = Placeholder or "Input di sini..."
+        TBox.PlaceholderText = Placeholder or "Input..."
         TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-        TBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 120)
-        TBox.Font = Enum.Font.SourceSans
-        TBox.TextSize = 14
-        TBox.TextXAlignment = Enum.TextXAlignment.Left
-        TBox.ClearTextOnFocus = false
         TBox.Parent = TextContainer
-
-        -- Efek pas di klik (Focus)
-        TBox.Focused:Connect(function()
-            TextContainer.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-        end)
-
-        -- Efek pas selesai ngetik/lepas fokus
-        TBox.FocusLost:Connect(function(enterPressed)
-            TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-            -- Jalankan callback setiap kali user selesai input
-            Callback(TBox.Text, enterPressed)
-        end)
+        TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
     end
 
     function InnerLib:dropdown(Text, List, Callback)
@@ -235,22 +203,27 @@ function IndraLib:window(HubName)
         DropdownBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
         DropdownBtn.Text = Text .. " >"
         DropdownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        DropdownBtn.ZIndex = 5
         DropdownBtn.Parent = Container
+        Instance.new("UICorner", DropdownBtn).CornerRadius = UDim.new(0, 6)
 
         local SidePanel = Instance.new("Frame")
-        SidePanel.Size = UDim2.new(0, 140, 0, 150)
-        SidePanel.Position = UDim2.new(0, 205, 0, 0) 
+        SidePanel.Size = UDim2.new(0, 140, 0, 0) -- Mulai dari tinggi 0 biar bisa dianimasiin
         SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         SidePanel.Visible = false
-        SidePanel.ZIndex = 10
-        SidePanel.Parent = DropdownBtn
+        SidePanel.ClipsDescendants = true
+        SidePanel.Parent = ScreenGui -- DIPINDAH KE SCREEN GUI BIAR GAK KEPOTONG
+        Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 6)
 
         local SideLayout = Instance.new("UIListLayout")
         SideLayout.Parent = SidePanel
-
+        
         DropdownBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
+            if SidePanel.Visible then
+                -- UPDATE POSISI REALTIME (Nempel di samping tombol)
+                SidePanel.Position = UDim2.new(0, DropdownBtn.AbsolutePosition.X + 205, 0, DropdownBtn.AbsolutePosition.Y)
+                SidePanel.Size = UDim2.new(0, 140, 0, #List * 30)
+            end
         end)
 
         for _, v in pairs(List) do
@@ -258,10 +231,8 @@ function IndraLib:window(HubName)
             Opt.Size = UDim2.new(1, 0, 0, 30)
             Opt.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             Opt.Text = tostring(v)
-            Opt.ZIndex = 15
             Opt.TextColor3 = Color3.fromRGB(230, 230, 230)
             Opt.Parent = SidePanel
-
             Opt.MouseButton1Click:Connect(function()
                 DropdownBtn.Text = tostring(v) .. " >"
                 Callback(v)
@@ -274,3 +245,4 @@ function IndraLib:window(HubName)
 end
 
 return IndraLib
+
