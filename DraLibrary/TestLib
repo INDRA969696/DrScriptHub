@@ -11,6 +11,7 @@ function IndraLib:window(HubName)
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+    -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0, 220, 0, 35)
@@ -27,12 +28,10 @@ function IndraLib:window(HubName)
     FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     FrameStroke.Parent = MainFrame
 
-    local MainCorner = Instance.new("UICorner")
-    MainCorner.CornerRadius = UDim.new(0, 9)
-    MainCorner.Parent = MainFrame
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 9)
 
+    -- [ TITLE BUTTON (DRAGGER) ] --
     local TitleBtn = Instance.new("TextButton")
-    TitleBtn.Name = "TitleBtn"
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
     TitleBtn.BackgroundTransparency = 1
     TitleBtn.Text = "      " .. HubName .. "  ▼"
@@ -44,7 +43,6 @@ function IndraLib:window(HubName)
     TitleBtn.Parent = MainFrame
 
     local Container = Instance.new("ScrollingFrame")
-    Container.Name = "Container"
     Container.Size = UDim2.new(1, 0, 0, 210) 
     Container.Position = UDim2.new(0, 0, 0, 35)
     Container.BackgroundTransparency = 1
@@ -56,7 +54,7 @@ function IndraLib:window(HubName)
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
-    UIList.Padding = UDim.new(0, 6)
+    UIList.Padding = UDim.new(0, 7)
     UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
     UIList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
@@ -100,74 +98,68 @@ function IndraLib:window(HubName)
 
     local InnerLib = {}
 
-    -- 1. Tombol Biasa
+    -- Fungsi Helper buat nambah Stroke Otomatis
+    local function AddStroke(obj, color)
+        local s = Instance.new("UIStroke")
+        s.Thickness = 1
+        s.Color = color or Color3.fromRGB(80, 80, 80)
+        s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        s.Parent = obj
+        return s
+    end
+
     function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 35)
-        Btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
-        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 5)
-        Instance.new("UIStroke", Btn).Color = Color3.fromRGB(60, 60, 60)
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
+        AddStroke(Btn)
         Btn.MouseButton1Click:Connect(Callback)
     end
-    
-    local ButtonStroke = Instance.new("UIStroke")
-    ButtonStroke.Thickness = 1
-    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
-    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    ButtonStroke.Parent = Btn
 
-    -- 2. Tombol Kecil
     function InnerLib:sbutton(Text, Callback)
         local SBtn = Instance.new("TextButton")
-        SBtn.Size = UDim2.new(0, 200, 0, 25)
-        SBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        SBtn.Size = UDim2.new(0, 200, 0, 28)
+        SBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
         SBtn.Text = Text
         SBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
         SBtn.TextSize = 12
         SBtn.Parent = Container
         Instance.new("UICorner", SBtn).CornerRadius = UDim.new(0, 4)
+        AddStroke(SBtn, Color3.fromRGB(70, 70, 70))
         SBtn.MouseButton1Click:Connect(Callback)
-       
     end
-  
-    local ButtonStroke = Instance.new("UIStroke")
-    ButtonStroke.Thickness = 1
-    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
-    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    ButtonStroke.Parent = SBtn
-    -- 3. Toggle
+
     function InnerLib:toggle(Text, Callback)
         local Tgl = Instance.new("TextButton")
         Tgl.Size = UDim2.new(0, 200, 0, 35)
         Tgl.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
         Tgl.Text = Text .. " : OFF"
-        Tgl.TextColor3 = Color3.fromRGB(255, 50, 50)
+        Tgl.TextColor3 = Color3.fromRGB(255, 80, 80)
         Tgl.Parent = Container
-        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 5)
+        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 6)
+        AddStroke(Tgl)
+        
         local State = false
         Tgl.MouseButton1Click:Connect(function()
             State = not State
-            Tgl.TextColor3 = State and Color3.fromRGB(50, 255, 50) or Color3.fromRGB(255, 50, 50)
+            Tgl.TextColor3 = State and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
             Tgl.Text = Text .. (State and " : ON" or " : OFF")
             Callback(State)
         end)
     end
-    local ButtonStroke = Instance.new("UIStroke")
-    ButtonStroke.Thickness = 1
-    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
-    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    ButtonStroke.Parent = Tgl
 
-    -- 4. Textbox
     function InnerLib:textbox(Placeholder, Callback)
         local BoxFrame = Instance.new("Frame")
         BoxFrame.Size = UDim2.new(0, 200, 0, 35)
         BoxFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
         BoxFrame.Parent = Container
-        Instance.new("UICorner", BoxFrame).CornerRadius = UDim.new(0, 5)
+        Instance.new("UICorner", BoxFrame).CornerRadius = UDim.new(0, 6)
+        AddStroke(BoxFrame)
+
         local TBox = Instance.new("TextBox")
         TBox.Size = UDim2.new(1, -10, 1, 0)
         TBox.Position = UDim2.new(0, 5, 0, 0)
@@ -178,13 +170,7 @@ function IndraLib:window(HubName)
         TBox.Parent = BoxFrame
         TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
     end
-    local ButtonStroke = Instance.new("UIStroke")
-    ButtonStroke.Thickness = 1
-    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
-    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    ButtonStroke.Parent = BoxFrame
 
-    -- 5. Dropdown
     function InnerLib:dropdown(Text, List, Callback)
         local DropBtn = Instance.new("TextButton")
         DropBtn.Size = UDim2.new(0, 200, 0, 35)
@@ -192,21 +178,49 @@ function IndraLib:window(HubName)
         DropBtn.Text = Text .. " >"
         DropBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
         DropBtn.Parent = Container
-        Instance.new("UICorner", DropBtn).CornerRadius = UDim.new(0, 5)
+        Instance.new("UICorner", DropBtn).CornerRadius = UDim.new(0, 6)
+        AddStroke(DropBtn)
+
+        local SidePanel = Instance.new("Frame")
+        SidePanel.Size = UDim2.new(0, 140, 0, 0)
+        SidePanel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        SidePanel.Visible = false
+        SidePanel.ClipsDescendants = true
+        SidePanel.ZIndex = 500
+        SidePanel.Parent = ScreenGui -- Wajib di ScreenGui biar gak kepotong ClipsDescendants MainFrame
         
-        -- Logic SidePanel tetep pake koordinat X absolut
+        Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 6)
+        AddStroke(SidePanel, Color3.fromRGB(255, 255, 255))
+
+        local SideLayout = Instance.new("UIListLayout")
+        SideLayout.Parent = SidePanel
+        
         DropBtn.MouseButton1Click:Connect(function()
-            -- Sesuaiin script dropdown lu yang lama di sini kalau mau panel samping muncul
-            print("Dropdown clicked: " .. Text)
+            SidePanel.Visible = not SidePanel.Visible
+            if SidePanel.Visible then
+                -- Posisi Realtime nempel di samping Dropdown button
+                SidePanel.Position = UDim2.new(0, DropBtn.AbsolutePosition.X + 225, 0, DropBtn.AbsolutePosition.Y)
+                SidePanel.Size = UDim2.new(0, 140, 0, math.min(#List * 30, 150))
+            end
         end)
+
+        for _, v in pairs(List) do
+            local Opt = Instance.new("TextButton")
+            Opt.Size = UDim2.new(1, 0, 0, 30)
+            Opt.BackgroundTransparency = 1
+            Opt.Text = tostring(v)
+            Opt.TextColor3 = Color3.fromRGB(200, 200, 200)
+            Opt.Parent = SidePanel
+            Opt.MouseButton1Click:Connect(function()
+                DropBtn.Text = tostring(v) .. " >"
+                Callback(v)
+                SidePanel.Visible = false
+            end)
+        end
     end
-    local ButtonStroke = Instance.new("UIStroke")
-    ButtonStroke.Thickness = 1
-    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
-    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    ButtonStroke.Parent = DropBtn
 
     return InnerLib
 end
 
 return IndraLib
+
