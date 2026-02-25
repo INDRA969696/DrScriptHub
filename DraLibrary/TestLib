@@ -155,7 +155,7 @@ function IndraLib:window(HubName)
     -- [ FITUR DALEM WINDOW ] --
     local InnerLib = {}
 
-    function InnerLib:CB(Text, Callback)
+    function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 40)
         Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -165,7 +165,7 @@ function IndraLib:window(HubName)
         Btn.MouseButton1Click:Connect(Callback)
     end
 
-    function InnerLib:CSB(Text, Callback)
+    function InnerLib:sbutton(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 30)
         Btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -175,7 +175,7 @@ function IndraLib:window(HubName)
         Btn.MouseButton1Click:Connect(Callback)
     end
 
-    function InnerLib:CT(Text, Callback)
+    function InnerLib:toggle(Text, Callback)
         local Tgl = Instance.new("TextButton")
         Tgl.Size = UDim2.new(0, 200, 0, 40)
         Tgl.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
@@ -191,7 +191,7 @@ function IndraLib:window(HubName)
         end)
     end
 
-    function InnerLib:CTX(Placeholder, Callback)
+    function InnerLib:textbox(Placeholder, Callback)
         local TextContainer = Instance.new("Frame")
         TextContainer.Size = UDim2.new(0, 200, 0, 45) -- Sedikit lebih tinggi biar lega
         TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -229,7 +229,7 @@ function IndraLib:window(HubName)
         end)
     end
 
-    function InnerLib:CD(Text, List, Callback)
+    function InnerLib:dropdown(Text, List, Callback)
         local DropdownBtn = Instance.new("TextButton")
         DropdownBtn.Size = UDim2.new(0, 200, 0, 40)
         DropdownBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
