@@ -1,58 +1,5 @@
 local IndraLib = {}
 
--- [ FUNGSI NOTIFY ] --
-function IndraLib:CreateNotify(title, text, duration)
-    local sgui = game:GetService("CoreGui"):FindFirstChild("IndraHub") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("IndraHub")
-    if not sgui then return end
-
-    local MainNotify = Instance.new("Frame")
-    MainNotify.Name = "Dralibs_Notify"
-    MainNotify.Size = UDim2.new(0, 220, 0, 70)
-    MainNotify.Position = UDim2.new(1.2, 0, 0.8, 0)
-    MainNotify.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    MainNotify.BorderSizePixel = 0
-    MainNotify.Parent = sgui
-    
-    Instance.new("UICorner", MainNotify).CornerRadius = UDim.new(0, 8)
-    local nStroke = Instance.new("UIStroke")
-    nStroke.Color = Color3.fromRGB(255, 255, 255)
-    nStroke.Thickness = 1
-    nStroke.Parent = MainNotify
-
-    local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Size = UDim2.new(1, -10, 0, 25)
-    TitleLabel.Position = UDim2.new(0, 5, 0, 5)
-    TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Text = tostring(title)
-    TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TitleLabel.TextSize = 14
-    TitleLabel.Font = Enum.Font.SourceSansBold
-    TitleLabel.TextXAlignment = Enum.HorizontalAlignment.Left
-    TitleLabel.Parent = MainNotify
-
-    local ContentLabel = Instance.new("TextLabel")
-    ContentLabel.Size = UDim2.new(1, -10, 1, -30)
-    ContentLabel.Position = UDim2.new(0, 5, 0, 30)
-    ContentLabel.BackgroundTransparency = 1
-    ContentLabel.Text = tostring(text)
-    ContentLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    ContentLabel.TextSize = 12
-    ContentLabel.TextWrapped = true
-    ContentLabel.TextXAlignment = Enum.HorizontalAlignment.Left
-    ContentLabel.TextYAlignment = Enum.VerticalAlignment.Top
-    ContentLabel.Parent = MainNotify
-
-    MainNotify:TweenPosition(UDim2.new(1, -230, 0.8, 0), "Out", "Quint", 0.5, true)
-
-    task.spawn(function()
-        task.wait(duration or 3)
-        MainNotify:TweenPosition(UDim2.new(1.2, 0, 0.8, 0), "In", "Quint", 0.5, true)
-        task.wait(0.5)
-        MainNotify:Destroy()
-    end)
-end
-
--- [ MAIN WINDOW ] --
 function IndraLib:window(HubName)
     local player = game.Players.LocalPlayer
     local pgui = player:WaitForChild("PlayerGui")
@@ -62,16 +9,18 @@ function IndraLib:window(HubName)
     ScreenGui.Name = "IndraHub"
     ScreenGui.Parent = pgui
     ScreenGui.ResetOnSpawn = false
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+    -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 220, 0, 35) -- Ukuran awal (ciut)
+    MainFrame.Size = UDim2.new(0, 220, 0, 35) -- Mulai dari ukuran Title
     MainFrame.Position = UDim2.new(0.5, -110, 0.2, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     MainFrame.BorderSizePixel = 0
     MainFrame.Active = true
-    MainFrame.Draggable = true -- Biar bisa digeser
-    MainFrame.ClipsDescendants = true
+    MainFrame.Draggable = true -- Dragging ON
+    MainFrame.ClipsDescendants = true -- Biar isi container gak tembus pas ketutup
     MainFrame.Parent = ScreenGui
 
     local FrameStroke = Instance.new("UIStroke")
@@ -84,17 +33,21 @@ function IndraLib:window(HubName)
     MainCorner.CornerRadius = UDim.new(0, 8)
     MainCorner.Parent = MainFrame
 
+    -- [ TITLE BUTTON ] --
     local TitleBtn = Instance.new("TextButton")
     TitleBtn.Name = "TitleBtn"
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
+    TitleBtn.Position = UDim2.new(0, 0, 0, 0)
     TitleBtn.BackgroundTransparency = 1
     TitleBtn.Text = "   " .. HubName .. "  ▼"
     TitleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     TitleBtn.TextSize = 15
     TitleBtn.Font = Enum.Font.SourceSansBold
     TitleBtn.TextXAlignment = Enum.HorizontalAlignment.Left
+    TitleBtn.ZIndex = 10 -- Pastiin paling depan
     TitleBtn.Parent = MainFrame
 
+    -- [ CONTAINER ] --
     local Container = Instance.new("ScrollingFrame")
     Container.Name = "Container"
     Container.Size = UDim2.new(1, 0, 0, 210) 
@@ -103,7 +56,7 @@ function IndraLib:window(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
     Container.Visible = false
-    Container.ClipsDescendants = true
+    Container.ZIndex = 5
     Container.Parent = MainFrame
 
     local UIList = Instance.new("UIListLayout")
@@ -122,7 +75,8 @@ function IndraLib:window(HubName)
         if toggled then
             TitleBtn.Text = "   " .. HubName .. "  ▲"
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
-            task.delay(0.1, function() Container.Visible = true end)
+            task.wait(0.1) -- Nunggu frame melebar dikit
+            Container.Visible = true
         else
             TitleBtn.Text = "   " .. HubName .. "  ▼"
             Container.Visible = false
@@ -132,79 +86,26 @@ function IndraLib:window(HubName)
 
     local InnerLib = {}
 
-    -- [ BUTTON ] --
     function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 35)
-        Btn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Btn.BackgroundTransparency = 0.95
+        Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        Btn.BackgroundTransparency = 0.5 -- Biar ada nuansa modern
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Btn.ZIndex = 6
         Btn.Parent = Container
         
         Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
         local bStroke = Instance.new("UIStroke")
         bStroke.Color = Color3.fromRGB(255, 255, 255)
         bStroke.Thickness = 0.8
-        bStroke.Transparency = 0.5
         bStroke.Parent = Btn
         
         Btn.MouseButton1Click:Connect(Callback)
     end
 
-    -- [ TOGGLE ] --
-    function InnerLib:toggle(Text, Callback)
-        local Tgl = Instance.new("TextButton")
-        Tgl.Size = UDim2.new(0, 200, 0, 35)
-        Tgl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Tgl.BackgroundTransparency = 0.95
-        Tgl.Text = Text .. " : OFF"
-        Tgl.TextColor3 = Color3.fromRGB(255, 50, 50)
-        Tgl.Parent = Container
-        
-        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 6)
-        local tStroke = Instance.new("UIStroke")
-        tStroke.Color = Color3.fromRGB(255, 255, 255)
-        tStroke.Thickness = 0.8
-        tStroke.Transparency = 0.5
-        tStroke.Parent = Tgl
-
-        local State = false
-        Tgl.MouseButton1Click:Connect(function()
-            State = not State
-            Tgl.TextColor3 = State and Color3.fromRGB(50, 255, 50) or Color3.fromRGB(255, 50, 50)
-            Tgl.Text = Text .. (State and " : ON" or " : OFF")
-            Callback(State)
-        end)
-    end
-
-    -- [ TEXTBOX ] --
-    function InnerLib:textbox(Placeholder, Callback)
-        local TextContainer = Instance.new("Frame")
-        TextContainer.Size = UDim2.new(0, 200, 0, 35)
-        TextContainer.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        TextContainer.BackgroundTransparency = 0.9
-        TextContainer.Parent = Container
-        Instance.new("UICorner", TextContainer).CornerRadius = UDim.new(0, 6)
-
-        local tbStroke = Instance.new("UIStroke")
-        tbStroke.Color = Color3.fromRGB(255, 255, 255)
-        tbStroke.Thickness = 0.8
-        tbStroke.Transparency = 0.5
-        tbStroke.Parent = TextContainer
-
-        local TBox = Instance.new("TextBox")
-        TBox.Size = UDim2.new(1, -10, 1, 0)
-        TBox.Position = UDim2.new(0, 5, 0, 0)
-        TBox.BackgroundTransparency = 1
-        TBox.Text = ""
-        TBox.PlaceholderText = Placeholder or "Input..."
-        TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-        TBox.Parent = TextContainer
-        
-        TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
-    end
-
+    -- Tambahin toggle/textbox di bawah sini kalo udah bener
     return InnerLib
 end
 
