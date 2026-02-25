@@ -200,7 +200,7 @@ function IndraLib:window(HubName)
     function InnerLib:textbox(Placeholder, Callback)
         local TextContainer = Instance.new("Frame")
         TextContainer.Size = UDim2.new(0, 200, 0, 40)
-        TextContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        TextContainer.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
         TextContainer.BorderSizePixel = 0
         TextContainer.Parent = Container
         Instance.new("UICorner", TextContainer).CornerRadius = UDim.new(0, 6)
