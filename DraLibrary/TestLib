@@ -233,11 +233,11 @@ function IndraLib:window(HubName)
         Instance.new("UICorner", DropdownBtn).CornerRadius = UDim.new(0, 6)
 
         local SidePanel = Instance.new("Frame")
-        SidePanel.Size = UDim2.new(0, 140, 0, 0) -- Mulai dari tinggi 0 biar bisa dianimasiin
+        SidePanel.Size = UDim2.new(0, 140, 0, 0)
         SidePanel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         SidePanel.Visible = false
         SidePanel.ClipsDescendants = true
-        SidePanel.Parent = ScreenGui -- DIPINDAH KE SCREEN GUI BIAR GAK KEPOTONG
+        SidePanel.Parent = ScreenGui
         Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 6)
 
         local SideLayout = Instance.new("UIListLayout")
@@ -246,7 +246,7 @@ function IndraLib:window(HubName)
         DropdownBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                SidePanel.Position = UDim2.new(0, DropdownBtn.AbsolutePosition.X + 205, -50, DropdownBtn.AbsolutePosition.Y)
+                SidePanel.Position = UDim2.new(0, DropdownBtn.AbsolutePosition.X + 205, 1, DropdownBtn.AbsolutePosition.Y)
                 SidePanel.Size = UDim2.new(0, 140, 0, #List * 30)
             end
         end)
