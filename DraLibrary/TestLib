@@ -11,18 +11,16 @@ function IndraLib:window(HubName)
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 220, 0, 35) -- Mulai dari tinggi Title
+    MainFrame.Size = UDim2.new(0, 220, 0, 35)
     MainFrame.Position = UDim2.new(0.5, -110, 0.3, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     MainFrame.BorderSizePixel = 0
-    MainFrame.ClipsDescendants = true -- Ini yang bikin rapi pas nutup
+    MainFrame.ClipsDescendants = true 
     MainFrame.Active = true
     MainFrame.Parent = ScreenGui
 
-    -- [ STROKE MODERN ] --
     local FrameStroke = Instance.new("UIStroke")
     FrameStroke.Thickness = 1.8
     FrameStroke.Color = Color3.fromRGB(255, 255, 255)
@@ -33,7 +31,6 @@ function IndraLib:window(HubName)
     MainCorner.CornerRadius = UDim.new(0, 9)
     MainCorner.Parent = MainFrame
 
-    -- [ TITLE BUTTON - BIAR BISA DI-DRAG JUGA ] --
     local TitleBtn = Instance.new("TextButton")
     TitleBtn.Name = "TitleBtn"
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
@@ -43,10 +40,9 @@ function IndraLib:window(HubName)
     TitleBtn.TextSize = 16
     TitleBtn.Font = Enum.Font.SourceSansBold
     TitleBtn.TextXAlignment = Enum.TextXAlignment.Left
-    TitleBtn.ZIndex = 10 -- Harus di atas biar bisa diklik
+    TitleBtn.ZIndex = 10 
     TitleBtn.Parent = MainFrame
 
-    -- [ CONTAINER ISINYA ] --
     local Container = Instance.new("ScrollingFrame")
     Container.Name = "Container"
     Container.Size = UDim2.new(1, 0, 0, 210) 
@@ -55,7 +51,7 @@ function IndraLib:window(HubName)
     Container.BorderSizePixel = 0
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
-    Container.Visible = false -- Awalnya sembunyi
+    Container.Visible = false 
     Container.Parent = MainFrame
 
     local UIList = Instance.new("UIListLayout")
@@ -67,15 +63,9 @@ function IndraLib:window(HubName)
         Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
     end)
 
-    -- [ SCRIPT DRAG MANUAL (BIAR GAK BUG DI MOBILE) ] --
+    -- [ DRAG SYSTEM ] --
     local UIS = game:GetService("UserInputService")
-    local dragging, dragInput, dragStart, startPos
-
-    local function update(input)
-        local delta = input.Position - dragStart
-        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-
+    local dragging, dragStart, startPos
     TitleBtn.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
@@ -86,14 +76,14 @@ function IndraLib:window(HubName)
             end)
         end
     end)
-
     UIS.InputChanged:Connect(function(input)
         if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-            update(input)
+            local delta = input.Position - dragStart
+            MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
     end)
 
-    -- [ LOGIC OPEN/CLOSE ] --
+    -- [ OPEN/CLOSE ] --
     local toggled = false
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
@@ -110,6 +100,7 @@ function IndraLib:window(HubName)
 
     local InnerLib = {}
 
+    -- 1. Tombol Biasa
     function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 35)
@@ -118,10 +109,74 @@ function IndraLib:window(HubName)
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
         Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 5)
-        local bS = Instance.new("UIStroke")
-        bS.Color = Color3.fromRGB(60, 60, 60)
-        bS.Parent = Btn
+        Instance.new("UIStroke", Btn).Color = Color3.fromRGB(60, 60, 60)
         Btn.MouseButton1Click:Connect(Callback)
+    end
+
+    -- 2. Tombol Kecil
+    function InnerLib:sbutton(Text, Callback)
+        local SBtn = Instance.new("TextButton")
+        SBtn.Size = UDim2.new(0, 200, 0, 25)
+        SBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        SBtn.Text = Text
+        SBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SBtn.TextSize = 12
+        SBtn.Parent = Container
+        Instance.new("UICorner", SBtn).CornerRadius = UDim.new(0, 4)
+        SBtn.MouseButton1Click:Connect(Callback)
+    end
+
+    -- 3. Toggle
+    function InnerLib:toggle(Text, Callback)
+        local Tgl = Instance.new("TextButton")
+        Tgl.Size = UDim2.new(0, 200, 0, 35)
+        Tgl.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        Tgl.Text = Text .. " : OFF"
+        Tgl.TextColor3 = Color3.fromRGB(255, 50, 50)
+        Tgl.Parent = Container
+        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 5)
+        local State = false
+        Tgl.MouseButton1Click:Connect(function()
+            State = not State
+            Tgl.TextColor3 = State and Color3.fromRGB(50, 255, 50) or Color3.fromRGB(255, 50, 50)
+            Tgl.Text = Text .. (State and " : ON" or " : OFF")
+            Callback(State)
+        end)
+    end
+
+    -- 4. Textbox
+    function InnerLib:textbox(Placeholder, Callback)
+        local BoxFrame = Instance.new("Frame")
+        BoxFrame.Size = UDim2.new(0, 200, 0, 35)
+        BoxFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+        BoxFrame.Parent = Container
+        Instance.new("UICorner", BoxFrame).CornerRadius = UDim.new(0, 5)
+        local TBox = Instance.new("TextBox")
+        TBox.Size = UDim2.new(1, -10, 1, 0)
+        TBox.Position = UDim2.new(0, 5, 0, 0)
+        TBox.BackgroundTransparency = 1
+        TBox.PlaceholderText = Placeholder
+        TBox.Text = ""
+        TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TBox.Parent = BoxFrame
+        TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
+    end
+
+    -- 5. Dropdown
+    function InnerLib:dropdown(Text, List, Callback)
+        local DropBtn = Instance.new("TextButton")
+        DropBtn.Size = UDim2.new(0, 200, 0, 35)
+        DropBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        DropBtn.Text = Text .. " >"
+        DropBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DropBtn.Parent = Container
+        Instance.new("UICorner", DropBtn).CornerRadius = UDim.new(0, 5)
+        
+        -- Logic SidePanel tetep pake koordinat X absolut
+        DropBtn.MouseButton1Click:Connect(function()
+            -- Sesuaiin script dropdown lu yang lama di sini kalau mau panel samping muncul
+            print("Dropdown clicked: " .. Text)
+        end)
     end
 
     return InnerLib
