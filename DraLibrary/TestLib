@@ -139,7 +139,7 @@ function IndraLib:window(HubName)
     Credit.BackgroundTransparency = 1
     Credit.Text = "MakeWithDraLibs"
     Credit.TextColor3 = Color3.fromRGB(100, 100, 100)
-    Credit.TextSize = 10
+    Credit.TextSize = 5
     Credit.TextXAlignment = Enum.TextXAlignment.Right
     Credit.Parent = MainFrame
 
@@ -200,7 +200,8 @@ function IndraLib:window(HubName)
     function InnerLib:textbox(Placeholder, Callback)
         local TextContainer = Instance.new("Frame")
         TextContainer.Size = UDim2.new(0, 200, 0, 40)
-        TextContainer.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+        TextContainer.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        TextContainer.BackgroundTransparency = 1
         TextContainer.BorderSizePixel = 0
         TextContainer.Parent = Container
         Instance.new("UICorner", TextContainer).CornerRadius = UDim.new(0, 6)
@@ -214,6 +215,12 @@ function IndraLib:window(HubName)
         TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
         TBox.Parent = TextContainer
         TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
+
+        local TBStroke = Instance.new("UIStroke")
+        TBStroke.Thickness = 1.3
+        TBStroke.Color = Color3.fromRGB(255, 255, 255)
+        TBStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        TBStroke.Parent = TextContainer
     end
 
     function InnerLib:dropdown(Text, List, Callback)
