@@ -50,7 +50,7 @@ function IndraLib:CreateNotify(title, text, duration)
     end)
 end
 
-function IndraLib:CreateWindow(HubName)
+function IndraLib:window(HubName)
     local player = game.Players.LocalPlayer
     local pgui = player:WaitForChild("PlayerGui")
 
