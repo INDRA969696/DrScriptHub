@@ -75,7 +75,7 @@ function IndraLib:CreateWindow(HubName)
     UICornerBtn.CornerRadius = UDim.new(1, 0)
     UICornerBtn.Parent = OpenBtn
 
-    -- Mobile Dragging (Sesuai kode asli lu)
+    -- Mobile Dragging
     local dragging, dragInput, dragStart, startPos
     OpenBtn.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
