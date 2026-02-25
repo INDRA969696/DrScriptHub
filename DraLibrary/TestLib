@@ -105,6 +105,9 @@ function IndraLib:window(HubName)
     Title.TextSize = 16
     Title.Parent = MainFrame
 
+    Instance.new("UICorner", MainFrame, Title).CornerRadius = UDim.new(0, 10)
+
+
     local Container = Instance.new("ScrollingFrame")
     Container.Size = UDim2.new(1, 0, 1, -50) 
     Container.Position = UDim2.new(0, 0, 0, 35)
