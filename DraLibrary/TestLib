@@ -112,11 +112,12 @@ function IndraLib:window(HubName)
         Instance.new("UIStroke", Btn).Color = Color3.fromRGB(60, 60, 60)
         Btn.MouseButton1Click:Connect(Callback)
     end
-    local FrameStroke = Instance.new("UIStroke")
-    FrameStroke.Thickness = 1
-    FrameStroke.Color = Color3.fromRGB(255, 255, 255)
-    FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    FrameStroke.Parent = MainFrame
+    
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Thickness = 1
+    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Parent = Btn
 
     -- 2. Tombol Kecil
     function InnerLib:sbutton(Text, Callback)
@@ -129,8 +130,14 @@ function IndraLib:window(HubName)
         SBtn.Parent = Container
         Instance.new("UICorner", SBtn).CornerRadius = UDim.new(0, 4)
         SBtn.MouseButton1Click:Connect(Callback)
+       
     end
-
+  
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Thickness = 1
+    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Parent = SBtn
     -- 3. Toggle
     function InnerLib:toggle(Text, Callback)
         local Tgl = Instance.new("TextButton")
@@ -148,6 +155,11 @@ function IndraLib:window(HubName)
             Callback(State)
         end)
     end
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Thickness = 1
+    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Parent = Tgl
 
     -- 4. Textbox
     function InnerLib:textbox(Placeholder, Callback)
@@ -166,6 +178,11 @@ function IndraLib:window(HubName)
         TBox.Parent = BoxFrame
         TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
     end
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Thickness = 1
+    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Parent = BoxFrame
 
     -- 5. Dropdown
     function InnerLib:dropdown(Text, List, Callback)
@@ -183,6 +200,11 @@ function IndraLib:window(HubName)
             print("Dropdown clicked: " .. Text)
         end)
     end
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Thickness = 1
+    ButtonStroke.Color = Color3.fromRGB(255, 255, 255)
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Parent = DropBtn
 
     return InnerLib
 end
