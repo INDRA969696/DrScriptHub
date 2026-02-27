@@ -115,20 +115,20 @@ function IndraLib:window(HubName)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Parent = Container
-        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 6)
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 5)
         AddStroke(Btn)
         Btn.MouseButton1Click:Connect(Callback)
     end
 
     function InnerLib:sbutton(Text, Callback)
         local SBtn = Instance.new("TextButton")
-        SBtn.Size = UDim2.new(0, 200, 0, 15)
+        SBtn.Size = UDim2.new(0, 200, 0, 25)
         SBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
         SBtn.Text = Text
         SBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        SBtn.TextSize = 12
+        SBtn.TextSize = 10
         SBtn.Parent = Container
-        Instance.new("UICorner", SBtn).CornerRadius = UDim.new(0, 4)
+        Instance.new("UICorner", SBtn).CornerRadius = UDim.new(0, 5)
         AddStroke(SBtn, Color3.fromRGB(70, 70, 70))
         SBtn.MouseButton1Click:Connect(Callback)
     end
@@ -140,7 +140,7 @@ function IndraLib:window(HubName)
         Tgl.Text = Text .. " : OFF"
         Tgl.TextColor3 = Color3.fromRGB(255, 80, 80)
         Tgl.Parent = Container
-        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 6)
+        Instance.new("UICorner", Tgl).CornerRadius = UDim.new(0, 5)
         AddStroke(Tgl)
         
         local State = false
@@ -157,7 +157,7 @@ function IndraLib:window(HubName)
         BoxFrame.Size = UDim2.new(0, 200, 0, 35)
         BoxFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
         BoxFrame.Parent = Container
-        Instance.new("UICorner", BoxFrame).CornerRadius = UDim.new(0, 6)
+        Instance.new("UICorner", BoxFrame).CornerRadius = UDim.new(0, 5)
         AddStroke(BoxFrame)
 
         local TBox = Instance.new("TextBox")
@@ -178,7 +178,7 @@ function IndraLib:window(HubName)
         DropBtn.Text = Text .. " >"
         DropBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
         DropBtn.Parent = Container
-        Instance.new("UICorner", DropBtn).CornerRadius = UDim.new(0, 6)
+        Instance.new("UICorner", DropBtn).CornerRadius = UDim.new(0, 5)
         AddStroke(DropBtn)
 
         local SidePanel = Instance.new("Frame")
@@ -187,9 +187,9 @@ function IndraLib:window(HubName)
         SidePanel.Visible = false
         SidePanel.ClipsDescendants = true
         SidePanel.ZIndex = 500
-        SidePanel.Parent = ScreenGui -- Wajib di ScreenGui biar gak kepotong ClipsDescendants MainFrame
+        SidePanel.Parent = ScreenGui
         
-        Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 6)
+        Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 5)
         AddStroke(SidePanel, Color3.fromRGB(255, 255, 255))
 
         local SideLayout = Instance.new("UIListLayout")
