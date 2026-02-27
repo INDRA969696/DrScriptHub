@@ -98,7 +98,7 @@ function IndraLib:window(HubName)
 
     local InnerLib = {}
 
-    -- Fungsi Helper buat nambah Stroke Otomatis
+    -- Stroke Reguler Helper
     local function AddStroke(obj, color)
         local s = Instance.new("UIStroke")
         s.Thickness = 1
@@ -198,7 +198,6 @@ function IndraLib:window(HubName)
         DropBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                -- Posisi Realtime nempel di samping Dropdown button
                 SidePanel.Position = UDim2.new(0, DropBtn.AbsolutePosition.X + 225, 0, DropBtn.AbsolutePosition.Y)
                 SidePanel.Size = UDim2.new(0, 140, 0, math.min(#List * 30, 150))
             end
