@@ -45,11 +45,6 @@ IndraLib:dropdown(Text, List, function(slected)
 <br clear="all" />
 <br />
 
-## Why Dralibs? (The Flex)
-* **No Bloatware:** Made with efficient code, it won't eat up FPS.
-* **Low-End Friendly:** Remains smooth even when playing on an unstable cellphone.
-* **Simple API:** You don't need a PhD to understand how to use it.
-
 ## Credits
 * **Indra**
 * **Pheedy**
