@@ -43,27 +43,6 @@ function IndraLib:window(HubName)
     TitleBtn.TextXAlignment = Enum.TextXAlignment.Left
     TitleBtn.Parent = MainFrame
 
-    -- [ CONTAINER ] - Pake ScrollingFrame biar tombolnya ga ilang
-    local Container = Instance.new("Frame")
-    Container.Name = "Container"
-    Container.Size = UDim2.new(1, -10, 1, -45)
-    Container.Position = UDim2.new(0, 5, 0, 30)
-    Container.BackgroundTransparency = 1
-    Container.BorderSizePixel = 0
-    Container.ScrollBarThickness = 2
-    Container.CanvasSize = UDim2.new(0, 0, 0, 0) -- Nanti otomatis nambah
-    Container.Parent = MainFrame
-
-    local UIList = Instance.new("UIListLayout")
-    UIList.Parent = Container
-    UIList.Padding = UDim.new(0, 5)
-    UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
-
-    -- Auto Adjust Height
-    UIList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
-    end)
-
     local Btn = Instance.new("TextButton")
     Btn.Size = UDim2.new(0, 200, 0, 35)
     Btn.AnchorPoint = Vector2.new(0.5, 0.5)
