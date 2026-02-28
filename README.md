@@ -55,7 +55,9 @@ IndraLib:dropdown(Text, List, function(slected)
 * **Pheedy**
 * **DraSky** (Brand Owner)
 ## Changelog
-* **Fix Dropdown**
+* **New Ui MainFrame**
+* **Change Helper function**
+* **Add SmallButton Layout**
 * ****
 ## Direct Usage Examples
 ```
