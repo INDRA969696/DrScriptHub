@@ -75,7 +75,6 @@ function IndraLib:window(HubName)
         
     Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 4)
 
-    return InnerLib
 end
 
 return IndraLib
