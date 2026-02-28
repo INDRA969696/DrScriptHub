@@ -16,9 +16,8 @@ function IndraLib:window(HubName)
     -- [ MAIN FRAME ]
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
-    -- Tinggi gue buat 250 dulu biar kelihatan isinya
-    MainFrame.Size = UDim2.new(0, 300, 0, 300) 
-    MainFrame.Position = UDim2.new(0.5, -110, 0.4, 30)
+    MainFrame.Size = UDim2.new(0, 280, 0, 280) 
+    MainFrame.Position = UDim2.new(0.5, -110, 0, 30)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
     MainFrame.Active = true
@@ -64,12 +63,11 @@ function IndraLib:window(HubName)
         Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
     end)
 
-    local Btn = Instance.new("TextButton")
-    
+    local Btn = Instance.new("Text")
     Btn.Size = UDim2.new(0, 200, 0, 35)
-    Btn.Position = UDim2.new(0, 5, 0, 30)
+    Btn.Position = UDim2.new(0.5, 0, 0.1, 30)
     Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    Btn.Text = Text
+    Btn.Text = "Text"
     Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
     Btn.Font = Enum.Font.Gotham
     Btn.TextSize = 14
