@@ -76,9 +76,6 @@ function IndraLib:window(HubName)
     Btn.Parent = MainFrame
         
     Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 4)
-        
-        end)
-    end
 
     return InnerLib
 end
