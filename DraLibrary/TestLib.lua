@@ -17,7 +17,7 @@ function IndraLib:window(HubName)
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0, 280, 0, 270)
-    MainFrame.AnchorPoint = Vector2.new(0.2, 0.5)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.55)
     MainFrame.Position = UDim2.new(0, 0, 0, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
