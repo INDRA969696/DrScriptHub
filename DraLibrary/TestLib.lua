@@ -17,7 +17,7 @@ function IndraLib:window(HubName)
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     -- Tinggi gue buat 250 dulu biar kelihatan isinya
-    MainFrame.Size = UDim2.new(0, 220, 0, 250) 
+    MainFrame.Size = UDim2.new(0, 300, 0, 300) 
     MainFrame.Position = UDim2.new(0.5, -110, 0.4, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
@@ -36,7 +36,7 @@ function IndraLib:window(HubName)
     local TitleBtn = Instance.new("TextLabel")
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
     TitleBtn.BackgroundTransparency = 1
-    TitleBtn.Text = "  " .. tostring(HubName) -- Pake .. biar ga error
+    TitleBtn.Text = "    " .. tostring(HubName)
     TitleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     TitleBtn.TextSize = 18
     TitleBtn.Font = Enum.Font.GothamBold
@@ -44,7 +44,7 @@ function IndraLib:window(HubName)
     TitleBtn.Parent = MainFrame
 
     -- [ CONTAINER ] - Pake ScrollingFrame biar tombolnya ga ilang
-    local Container = Instance.new("ScrollingFrame")
+    local Container = Instance.new("Frame")
     Container.Name = "Container"
     Container.Size = UDim2.new(1, -10, 1, -45)
     Container.Position = UDim2.new(0, 5, 0, 30)
@@ -64,23 +64,19 @@ function IndraLib:window(HubName)
         Container.CanvasSize = UDim2.new(0, 0, 0, UIList.AbsoluteContentSize.Y + 10)
     end)
 
-    local InnerLib = {}
-
-    function InnerLib:button(Text, Callback)
-        local Btn = Instance.new("TextButton")
-        Btn.Size = UDim2.new(0, 200, 0, 35)
-        BTN.Position = UDim2.new("0, 30, 0")
-        Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-        Btn.Text = Text
-        Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Btn.Font = Enum.Font.Gotham
-        Btn.TextSize = 14
-        Btn.Parent = MainFrame
+    local Btn = Instance.new("TextButton")
+    
+    Btn.Size = UDim2.new(0, 200, 0, 35)
+    Btn.Position = UDim2.new("0, 5, 0, 30")
+    Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Btn.Text = Text
+    Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Btn.Font = Enum.Font.Gotham
+    Btn.TextSize = 14
+    Btn.Parent = MainFrame
         
-        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 4)
+    Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 4)
         
-        Btn.MouseButton1Click:Connect(function()
-            pcall(Callback) -- Pake pcall biar kalau callback error, UI ga rusak
         end)
     end
 
