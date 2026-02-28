@@ -20,6 +20,7 @@ function IndraLib:window(HubName)
     MainFrame.Position = UDim2.new(0.5, -110, 0, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
+    MainFrame.ClipsDescendants = false
     MainFrame.Active = true
     MainFrame.Draggable = false
     MainFrame.Parent = ScreenGui
