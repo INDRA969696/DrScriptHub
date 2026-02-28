@@ -22,7 +22,7 @@ function IndraLib:window(HubName)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
     MainFrame.Active = true
-    MainFrame.Draggable = true -- Biar bisa digeser buat ngetes
+    MainFrame.Draggable = false
     MainFrame.Parent = ScreenGui
 
     local FrameStroke = Instance.new("UIStroke")
@@ -47,7 +47,7 @@ function IndraLib:window(HubName)
     local Container = Instance.new("ScrollingFrame")
     Container.Name = "Container"
     Container.Size = UDim2.new(1, -10, 1, -45)
-    Container.Position = UDim2.new(0, 5, 0, 40)
+    Container.Position = UDim2.new(0, 5, 0, 30)
     Container.BackgroundTransparency = 1
     Container.BorderSizePixel = 0
     Container.ScrollBarThickness = 2
@@ -69,12 +69,13 @@ function IndraLib:window(HubName)
     function InnerLib:button(Text, Callback)
         local Btn = Instance.new("TextButton")
         Btn.Size = UDim2.new(0, 200, 0, 35)
+        BTN.Position = UDim2.new("0, 30, 0")
         Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         Btn.Text = Text
         Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
         Btn.Font = Enum.Font.Gotham
         Btn.TextSize = 14
-        Btn.Parent = Container
+        Btn.Parent = MainFrame
         
         Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 4)
         
