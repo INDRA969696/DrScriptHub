@@ -12,7 +12,7 @@ local CoinTG = false
 local MyHub = IndraLib:CreateWindow("Droper Incremental")
 
 -- Auto Click
-MyHub:CreateToggle("Auto click", function(State)
+MyHub:toggle("Auto click", function(State)
     _G.AutoFish = State
     if _G.AutoFish then
         task.spawn(function()
@@ -25,7 +25,7 @@ MyHub:CreateToggle("Auto click", function(State)
 end)
 
 -- Rebirth
-MyHub:CreateButton("rebirth", function()
+MyHub:button("rebirth", function()
   game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Rebirth"):FireServer()
 end)
 
@@ -39,7 +39,7 @@ task.spawn(function()
         if success and coinPart.Transparency == 0.5 and not CoinTG then
             CoinTG = true
             
-            MyHub:CreateToggle("Auto Collect Coins", function(State)
+            MyHub:toggle("Auto Collect Coins", function(State)
                 _G.AutoCollect = State
                 
                 if _G.AutoCollect then
