@@ -18,7 +18,7 @@ function IndraLib:window(HubName)
     MainFrame.Name = "MainFrame"
     -- Tinggi gue buat 250 dulu biar kelihatan isinya
     MainFrame.Size = UDim2.new(0, 300, 0, 300) 
-    MainFrame.Position = UDim2.new(0.5, -110, 0.4, 0)
+    MainFrame.Position = UDim2.new(0.5, -110, 0.4, 30)
     MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     MainFrame.BorderSizePixel = 0
     MainFrame.Active = true
