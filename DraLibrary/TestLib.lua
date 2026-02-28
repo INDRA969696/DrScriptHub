@@ -46,6 +46,7 @@ function IndraLib:window(HubName)
     local Btn = Instance.new("TextButton")
     Btn.Size = UDim2.new(0, 200, 0, 35)
     Btn.AnchorPoint = Vector2.new(0.5, 0.5)
+    Btn.Position = UDim2.new(0.5, 0, 0.5, 0) 
     Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     Btn.Text = "Text"
     Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
