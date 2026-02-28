@@ -4,7 +4,7 @@
 ## prepair
 ### installation
 ```
-local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibs?t="..tick()))()
+local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibs))()
 ```
 ### Create Window
 ```
