@@ -8,16 +8,16 @@ local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA
 ```
 ### Create Window
 ```
-MyHub:CreateWindow(Text)
+local Hub = dralibs:window("Title")
 ```
 ## Function
 ### Button
 ```
-MyHub:Create button(Text, function())
+Hub:button(Text, function())
 ```
 ### Toggle
 ```
-IndraLib:CreateToggle(Text, function(state))
+Hub:toggle(Text, function(state))
 ```
 ### Notify
 ```
@@ -25,7 +25,7 @@ IndraLib:CreateNotify(Title, Text, Duration)
 ```
 ### Dropdown
 ```
-IndraLib:CreateDropdown(Text, List, function(slected)
+IndraLib:dropdown(Text, List, function(slected)
 ```
 
 # DraLibs(the minimalist UI)
@@ -57,3 +57,18 @@ IndraLib:CreateDropdown(Text, List, function(slected)
 ## Changelog
 * **Fix Dropdown**
 * ****
+## Direct Usage Examples
+```
+local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/TestLib.lua"))()
+local hub = dralibs:window("Testlib")
+hub:button("Example", function()
+  print("Button") end)
+hub:sbutton("Example", function()
+  print("Small Button") end)
+hub:toggle("Example", function(state)
+  print("Toggle") end)
+hub:textbox("Example", function()
+  print("TextBox") end)
+hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function()
+  end)
+```
