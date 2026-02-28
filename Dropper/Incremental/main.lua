@@ -9,7 +9,7 @@ IndraLib:CreateNotify("DraLibs Loaded!", "Script by Indra No Root. Enjoy!", 10)
 local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CollectPart")
 local CoinTG = false 
 
-local MyHub = IndraLib:CreateWindow("Droper Incremental")
+local MyHub = IndraLib:window("Droper Incremental")
 
 -- Auto Click
 MyHub:toggle("Auto click", function(State)
