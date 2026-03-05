@@ -86,11 +86,11 @@ function IndraLib:window(HubName)
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         if toggled then
-            TitleBtn.Text = "      " .. HubName ..
+            TitleBtn.Text = "      " .. HubName
             Container.Visible = true
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
         else
-            TitleBtn.Text = "      " .. HubName ..
+            TitleBtn.Text = "      " .. HubName
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 35), "Out", "Quint", 0.4, true)
             task.delay(0.3, function() if not toggled then Container.Visible = false end end)
         end
