@@ -3,13 +3,13 @@ if game.PlaceId ~= 70960300100792 then return end
 -- [This script is made free if you find this script with a key please do not use it because there is a risk of malware in it[!]]--
 -- Made By : Indra No Root
 -- Brand Name : DraScript/DraSky
-local IndraLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/DraLibs"))()
-IndraLib:CreateNotify("DraLibs Loaded!", "Script by Indra No Root. Enjoy!", 10)
+local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/refs/heads/main/DraLibrary/DraLibs"))()
+dralibs:CreateNotify("DraLibs Loaded!", "Script by Indra No Root. Enjoy!", 10)
 
 local Remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CollectPart")
 local CoinTG = false 
 
-local MyHub = IndraLib:window("Droper Incremental")
+local MyHub = dralibs:window("Droper Incremental")
 
 -- Auto Click
 MyHub:toggle("Auto click", function(State)
