@@ -15,7 +15,7 @@ function IndraLib:window(HubName)
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0, 220, 0, 35)
-    MainFrame.Position = UDim2.new(0.3, -110, 0.3, 0)
+    MainFrame.Position = UDim2.new(0.4, -110, 0.3, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true 
