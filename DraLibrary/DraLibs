@@ -65,7 +65,7 @@ function IndraLib:window(HubName)
     -- [ DRAG SYSTEM ] --
     local UIS = game:GetService("UserInputService")
     local dragging, dragStart, startPos
-    local dragThreshold = 10
+    local dragThreshold = 5
     local moveDistance = 0
 
     TitleBtn.InputBegan:Connect(function(input)
@@ -100,7 +100,7 @@ function IndraLib:window(HubName)
     end)
 
     -- [ OPEN/CLOSE ] --
-    local toggled = false
+    local toggled = true
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         if toggled then
