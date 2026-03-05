@@ -10,6 +10,7 @@ function IndraLib:window(HubName)
     ScreenGui.Parent = pgui
     ScreenGui.ResetOnSpawn = false
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.DisplayOrder = 999999999
 
     -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
@@ -20,7 +21,6 @@ function IndraLib:window(HubName)
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true 
     MainFrame.Active = true
-    MainFrame.ZIndex = 500
     MainFrame.Parent = ScreenGui
 
     local FrameStroke = Instance.new("UIStroke")
