@@ -66,6 +66,6 @@ hub:toggle("Example", function(state)
   print("Toggle") end)
 hub:textbox("Example", function()
   print("TextBox") end)
-hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function(v)
+hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function()
   end)
 ```
