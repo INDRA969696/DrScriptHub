@@ -4,7 +4,7 @@
 ## prepair
 ### installation
 ```
-local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibs))()
+local dralibs = loadstring(game:HttpGet("https://raw.githubusercontent.com/INDRA969696/DrScriptHub/main/DraLibrary/DraLibs))()
 ```
 ### Create Window
 ```
@@ -66,6 +66,6 @@ hub:toggle("Example", function(state)
   print("Toggle") end)
 hub:textbox("Example", function()
   print("TextBox") end)
-hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function()
+hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function(v)
   end)
 ```
