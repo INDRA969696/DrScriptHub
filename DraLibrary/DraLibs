@@ -64,43 +64,40 @@ function IndraLib:window(HubName)
 
     -- [ DRAG SYSTEM ] --
     local UIS = game:GetService("UserInputService")
-local dragging, dragStart, startPos
-local dragThreshold = 10
-local moveDistance = 0
+    local dragging, dragStart, startPos
+    local dragThreshold = 10
+    local moveDistance = 0
 
-TitleBtn.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        dragStart = input.Position
-        startPos = MainFrame.Position
-        moveDistance = 0 -- Reset jarak tiap kali jempol nempel
-    end
-end)
+    TitleBtn.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = MainFrame.Position
+            moveDistance = 0
+        end
+    end)
 
-UIS.InputChanged:Connect(function(input)
-    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-        local delta = input.Position - dragStart
-        moveDistance = delta.Magnitude
+    UIS.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local delta = input.Position - dragStart
+            moveDistance = delta.Magnitude
         
-        -- Cuma gerakin UI kalo gesernya udah jauh (Threshold)
-        if moveDistance > dragThreshold then
-            MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            if moveDistance > dragThreshold then
+                MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
         end
-    end
-end)
+    end)
 
-TitleBtn.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = false
-        -- [ CEK DISINI ]: Kalo jempol gak gerak banyak, berarti itu KLIK
-        if moveDistance < dragThreshold then
-            -- MASUKKIN FUNGSI BUKA/TUTUP LU DISINI --
-            toggled = not toggled
-            Container.Visible = toggled
-            MainFrame.Size = toggled and UDim2.new(0, 220, 0, 240) or UDim2.new(0, 220, 0, 35)
+    TitleBtn.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+            if moveDistance < dragThreshold then
+                toggled = not toggled
+                Container.Visible = toggled
+                MainFrame.Size = toggled and UDim2.new(0, 220, 0, 240) or UDim2.new(0, 220, 0, 35)
+            end
         end
-    end
-end)
+    end)
 
     -- [ OPEN/CLOSE ] --
     local toggled = false
