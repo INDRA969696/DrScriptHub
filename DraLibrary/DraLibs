@@ -51,7 +51,7 @@ function IndraLib:window(HubName)
     Container.CanvasSize = UDim2.new(0, 0, 0, 0)
     Container.ScrollBarThickness = 2
     Container.Visible = true
-    Container.Parent = MainFrame
+    Container.Parent = ScreenGui
 
     local UIList = Instance.new("UIListLayout")
     UIList.Parent = Container
