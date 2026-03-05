@@ -15,7 +15,7 @@ function IndraLib:window(HubName)
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0, 220, 0, 35)
-    MainFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
+    MainFrame.Position = UDim2.new(0.3, -110, 0.3, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true 
@@ -86,11 +86,11 @@ function IndraLib:window(HubName)
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         if toggled then
-            TitleBtn.Text = "      " .. HubName
+            TitleBtn.Text = "      " .. HubName .. " "
             Container.Visible = true
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
         else
-            TitleBtn.Text = "      " .. HubName
+            TitleBtn.Text = "      " .. HubName .. " "
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 35), "Out", "Quint", 0.4, true)
             task.delay(0.3, function() if not toggled then Container.Visible = false end end)
         end
