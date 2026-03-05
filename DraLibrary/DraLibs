@@ -9,8 +9,8 @@ function IndraLib:window(HubName)
     ScreenGui.Name = "IndraHub"
     ScreenGui.Parent = pgui
     ScreenGui.ResetOnSpawn = false
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.DisplayOrder = 999999999
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     -- [ MAIN FRAME ] --
     local MainFrame = Instance.new("Frame")
