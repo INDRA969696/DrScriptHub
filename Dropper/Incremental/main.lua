@@ -1,5 +1,3 @@
-if game.PlaceId ~= 70960300100792 then return end
-
 -- [This script is made free if you find this script with a key please do not use it because there is a risk of malware in it[!]]--
 -- Made By : Indra No Root
 -- Brand Name : DraScript/DraSky
