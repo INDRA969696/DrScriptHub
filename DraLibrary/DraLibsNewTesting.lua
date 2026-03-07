@@ -212,14 +212,11 @@ function IndraLib:window(HubName)
         
         Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 5)
         AddStroke(SidePanel, Color3.fromRGB(255, 255, 255))
-
-        local SideLayout = Instance.new("UIListLayout")
-        SideLayout.Parent = SidePanel
         
         DropBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                SidePanel.Position = UDim2.new(0, DropBtn.AbsolutePosition.X + 225, 0, DropBtn.AbsolutePosition.Y)
+                SidePanel.Position = UDim2.new(0.85, 0, 0.1, 0)
                 SidePanel.Size = UDim2.new(0, 140, 0, math.min(#List * 30, 150))
             end
         end)
