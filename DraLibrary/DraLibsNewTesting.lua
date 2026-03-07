@@ -65,40 +65,20 @@ function IndraLib:window(HubName)
     -- [ DRAG SYSTEM ] --
     local UIS = game:GetService("UserInputService")
     local dragging, dragStart, startPos
-    local isDragging = false -- [KUNCI NYA DISINI]
-
     TitleBtn.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
-            isDragging = false -- Reset tiap kali sentuh
             dragStart = input.Position
             startPos = MainFrame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then dragging = false end
+            end)
         end
     end)
-
     UIS.InputChanged:Connect(function(input)
         if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
             local delta = input.Position - dragStart
-        
-            if delta.Magnitude > 2 then
-                isDragging = true
-                MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-            end
-        end
-    end)
-
-    TitleBtn.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = false
-        
-            -- CUMA JALANIN KLIK KALO GAK LAGI NGEDRAG
-            if not isDragging then
-                toggled = not toggled
-                Container.Visible = toggled
-                MainFrame:TweenSize(toggled and UDim2.new(0, 220, 0, 250) or UDim2.new(0, 220, 0, 35), "Out", "Quint", 0.3, true)
-            end
-        
-            isDragging = false
+            MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
     end)
 
@@ -219,7 +199,7 @@ function IndraLib:window(HubName)
         DropBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                SidePanel.Position = UDim2.new(0.75, 0, 0.1, 0)
+                SidePanel.Position = UDim2.new(0.75, 0, 0.03, 0)
                 SidePanel.Size = UDim2.new(0, 140, 0, math.min(#List * 30, 150))
             end
         end)
