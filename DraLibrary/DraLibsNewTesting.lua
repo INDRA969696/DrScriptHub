@@ -216,7 +216,7 @@ function IndraLib:window(HubName)
         DropBtn.MouseButton1Click:Connect(function()
             SidePanel.Visible = not SidePanel.Visible
             if SidePanel.Visible then
-                SidePanel.Position = UDim2.new(0.85, 0, 0.1, 0)
+                SidePanel.Position = UDim2.new(0.75, 0, 0.1, 0)
                 SidePanel.Size = UDim2.new(0, 140, 0, math.min(#List * 30, 150))
             end
         end)
