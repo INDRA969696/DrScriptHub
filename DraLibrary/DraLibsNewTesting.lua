@@ -35,7 +35,7 @@ function IndraLib:window(HubName)
     local TitleBtn = Instance.new("TextButton")
     TitleBtn.Size = UDim2.new(1, 0, 0, 35)
     TitleBtn.BackgroundTransparency = 1
-    TitleBtn.Text = "      " .. HubName .. "  "
+    TitleBtn.Text = "      " .. HubName
     TitleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     TitleBtn.TextSize = 16
     TitleBtn.Font = Enum.Font.SourceSansBold
@@ -87,11 +87,11 @@ function IndraLib:window(HubName)
     TitleBtn.MouseButton1Click:Connect(function()
         toggled = not toggled
         if toggled then
-            TitleBtn.Text = "      " .. HubName .. "  "
+            TitleBtn.Text = "     < " .. HubName .. "  "
             Container.Visible = true
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 250), "Out", "Quint", 0.4, true)
         else
-            TitleBtn.Text = "      " .. HubName .. "  "
+            TitleBtn.Text = "     > " .. HubName .. "  "
             MainFrame:TweenSize(UDim2.new(0, 220, 0, 35), "Out", "Quint", 0.4, true)
             task.delay(0.3, function() if not toggled then Container.Visible = false end end)
         end
