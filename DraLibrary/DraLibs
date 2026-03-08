@@ -189,7 +189,7 @@ function IndraLib:window(HubName)
         TBox.Text = ""
         TBox.TextColor3 = Color3.fromRGB(255, 255, 255)
         TBox.Parent = BoxFrame
-        TBox.FocusLost:Connect(function() Callback(TBox.Text) end)
+        TBox.FocusLost:Connect(function() local TextInput = string.lower(TBox.Text) Callback(TextInput) end)
     end
 
     function InnerLib:dropdown(Text, List, Callback)
