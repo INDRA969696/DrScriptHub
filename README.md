@@ -69,7 +69,7 @@ hub:sbutton("Example", function()
 hub:toggle("Example", function(state)
   print("Toggle") end)
 
-hub:textbox("Example", function()
+hub:textbox("Example", function(CallBack)
   print("TextBox") end)
 
 hub:dropdown("Example", {'test1', "test2", "test3", "test4"}, function()
