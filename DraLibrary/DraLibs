@@ -18,18 +18,19 @@ function IndraLib:window(HubName)
     MainFrame.Size = UDim2.new(0, 220, 0, 35)
     MainFrame.Position = UDim2.new(0.5, -110, 0.12, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    MainFrame.BackgroundTransparency = 0.6
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true 
     MainFrame.Active = true
     MainFrame.Parent = ScreenGui
 
     local FrameStroke = Instance.new("UIStroke")
-    FrameStroke.Thickness = 1.8
+    FrameStroke.Thickness = 0.8
     FrameStroke.Color = Color3.fromRGB(255, 255, 255)
     FrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     FrameStroke.Parent = MainFrame
 
-    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 9)
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 6)
 
     -- [ TITLE BUTTON (DRAGGER) ] --
     local TitleBtn = Instance.new("TextButton")
