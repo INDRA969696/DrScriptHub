@@ -51,7 +51,7 @@ IndraLib:TextBox(Text, function(callback) end)
 ## Credits
 * **Indra**
 * **Pheedy**
-* **DraSky** (Brand Owner)
+* **Drox** (Brand Owner)
 ## Changelog
 * **New Ui MainFrame**
 * **Change Helper function**
